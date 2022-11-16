@@ -1,3 +1,196 @@
 /* 
     General Styles used on every website (Don't Repeat Yourself)
 */
+
+:root {
+  --color-azul: #293250;
+  --color-amarillo: #fed163;
+  --color-lima: #6dd47e;
+}
+
+.logo {
+  height: 70px;
+}
+
+.navbar {
+  background-color: var(--color-amarillo);
+}
+
+.card {
+  border: 0;
+}
+
+.login {
+  background-color: var(--color-azul);
+  border-color: #293250;
+  color: var(--color-amarillo);
+  font-weight: bold;
+}
+
+.login:hover {
+  background-color: var(--color-azul);
+  border-color: #293250;
+}
+
+.logo_signup {
+  width: 300px;
+  height: 300px;
+  background-color: blue;
+}
+
+.signup {
+  width: 500px;
+  margin: 0 auto;
+}
+
+.btn-signup {
+  background-color: var(--color-lima);
+  border-color: var(--color-lima);
+  color: var(--color-azul);
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.btn-signup:hover {
+  background-color: var(--color-lima);
+  border-color: var(--color-lima);
+}
+
+.btn-liberar {
+  background-color: var(--color-amarillo);
+  border-color: var(--color-amarillo);
+  font-weight: bold;
+  color: var(--color-azul);
+}
+
+.btn-liberar:hover {
+  background-color: var(--color-amarillo);
+  border-color: var(--color-amarillo);
+  font-weight: bold;
+}
+
+.btn-closed {
+  border-color: #293250;
+  color: #293250;
+  font-weight: bold;
+}
+
+.btn-closed:hover {
+  background-color: #293250;
+}
+
+.register {
+  background-color: var(--color-lima);
+  border-color: #6dd47e;
+  color: var(--color-azul);
+  font-weight: bold;
+}
+
+.register:hover {
+  background-color: var(--color-lima);
+  border-color: var(--color-lima);
+}
+
+.leyenda {
+  width: 50%;
+  margin: 0 auto;
+  width: 300px;
+  height: 80px;
+  padding-top: 5px;
+  border-radius: 16px;
+  background-color: var(--color-amarillo);
+}
+.talonario {
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 10px;
+  background: #fed163;
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5.1px);
+  -webkit-backdrop-filter: blur(5.1px);
+  border: 1px solid #fed163;
+}
+
+.landing {
+  background-image: url("../img/landingHome.png");
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.content-overlay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 30%;
+}
+
+.content-overlay .text-overlay {
+  font-weight: bold;
+  font-size: 22px;
+  text-align: center;
+}
+
+.button-overlay {
+  background-color: #293250;
+  color: #fed163;
+  font-weight: bold;
+  font-size: 18px;
+  width: 200px;
+  height: 50px;
+  border-color: #293250;
+  border-radius: 10px;
+}
+
+.button-overlay:hover {
+  background-color: #293250;
+  border-color: #293250;
+}
+
+.datos-talonario {
+  max-width: 600px;
+  height: 220px;
+  margin: 0 auto;
+
+  background: rgba(255, 255, 255, 0.51);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5.1px);
+  -webkit-backdrop-filter: blur(5.1px);
+  border: 2px solid black;
+}
+.item-talonario {
+  width: 60%;
+  border-bottom: 1px solid black;
+}
+.numero {
+  font-weight: bold;
+  top: calc(50% - 150px);
+  left: calc(50% - 150px);
+  font-size: 18px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  padding: 10px;
+}
+
+.numero_disponible {
+  color: black;
+  border: 2px dashed black;
+}
+
+.numero_reservado {
+  background: var(--color-azul);
+  color: #fed163;
+  border: 2px solid var(--color-azul);
+}
+
+.numero_pagado {
+  background: var(--color-lima);
+  color: #fed163;
+  font-weight: bold;
+  border: 2px solid var(--color-lima);
+  padding: 10px;
+}
