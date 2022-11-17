@@ -1,10 +1,14 @@
 import React from "react";
-import { Buttons } from "./Buttons.js";
-import { VistaTickets } from "./VistaTickets.js";
+import { Buttons } from "../component/Buttons.js";
+import { VistaTickets } from "../component/VistaTickets.js";
 
 export const Buy = () => {
   return (
     <div>
+      
+      
+      
+      
       <Buttons />
       {/* <div
         className="buy container container-fluid text-center p-3 mt-2 text-black rounded"
