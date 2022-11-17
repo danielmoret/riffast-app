@@ -208,10 +208,6 @@
   font-weight: bold;
 }
 
-.buying {
-  background-color: var(--color-lima);
-}
-
 .reservation {
   background-color: var(--color-amarillo);
   color: var(--color-azul);
