@@ -1,10 +1,44 @@
-import React, { useContext } from "react";
-import { Context } from "../store/appContext";
-import rigoImageUrl from "../../img/rigo-baby.jpg";
+import React, { useContext, useState } from "react";
+import { Link } from "react-router-dom";
+import homeImage from "../../img/landingHome.png";
 import "../../styles/home.css";
 
 export const Home = () => {
+<<<<<<< HEAD
   const { store, actions } = useContext(Context);
 
   return <></>;
+=======
+  return (
+    <>
+      <div
+        /* style={{
+          backgroundImage: `url(${homeImage})`,
+          height: "80vh",
+          width: "100%",
+          padding: "30px",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+        }} */
+        className="d-flex align-items-center landing"
+      >
+        <div className="content-overlay">
+          <div className="text-overlay">
+            Olvida ya esos talonarios de papel.&nbsp;
+            <span style={{ color: "#6dd47e" }}>
+              Crea, administra y comparte tu talonario virtual &nbsp;
+            </span>
+            con nosotros
+          </div>
+          <Link to="/signup">
+            <button className="button-overlay btn btn-success mt-4">
+              Crea tu rifa ya!
+            </button>
+          </Link>
+        </div>
+      </div>
+    </>
+  );
+>>>>>>> 1bae37ae9bebc4e564a9bb5c472c928d5621328b
 };
