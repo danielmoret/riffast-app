@@ -7,7 +7,7 @@ export const Home = () => {
   return (
     <>
       <div
-        style={{
+        /* style={{
           backgroundImage: `url(${homeImage})`,
           height: "80vh",
           width: "100%",
@@ -15,8 +15,8 @@ export const Home = () => {
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
-        }}
-        className="d-flex align-items-center"
+        }} */
+        className="d-flex align-items-center landing"
       >
         <div className="content-overlay">
           <div className="text-overlay">
