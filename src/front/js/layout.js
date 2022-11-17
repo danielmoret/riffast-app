@@ -12,6 +12,7 @@ import { Footer } from "./component/footer";
 import { Raffler } from "./pages/Raffler";
 import { Signup } from "./pages/Signup";
 import { Login } from "./pages/Login";
+import { Luis } from "./pages/luis";
 
 //create your first component
 const Layout = () => {
@@ -31,6 +32,7 @@ const Layout = () => {
             <Route element={<Login />} path="/login" />
             <Route element={<Demo />} path="/demo" />
             <Route element={<Single />} path="/single/:theid" />
+            <Route element={<Luis />} path="/luis" />
             <Route element={<h1>Not found!</h1>} />
           </Routes>
           <Footer />

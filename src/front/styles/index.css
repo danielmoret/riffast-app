@@ -2,6 +2,53 @@
     General Styles used on every website (Don't Repeat Yourself)
 */
 
+.lt {
+  height: 200px;
+  width: 200px;
+  background-color: #fed163;
+  margin-top: 30px;
+}
+.foto {
+  width: 120px;
+  height: 120px;
+}
+
+.numero-t {
+  color: red;
+}
+.datosjugador {
+  width: 60%;
+  border-bottom: 1px solid black;
+}
+
+.boleto {
+  max-width: 600px;
+  height: 220px;
+  margin: 0 auto;
+  border-radius: 16px;
+  border: 2px solid black;
+}
+
+
+.delos {
+  background-color:  #fed163;
+  border-radius: 16px;
+  margin-top: 30px;
+}
+
+.card-img {
+  height: 150px;
+  width: 150px;
+}
+
+
+
+
+
+
+
+
+
 :root {
   --color-azul: #293250;
   --color-amarillo: #fed163;
