@@ -42,7 +42,7 @@ export const Luis = () => {
 
                 <div className="card-group todoslostiket row">
                     <div class="card lt">
-                        <img src="https://c8.alamy.com/compes/r0ap52/icono-de-entradas-de-cine-en-casa-de-estilo-admitir-un-cupon-entrada-ilustracion-vectorial-sobre-el-aislamiento-del-fondo-concepto-de-negocio-ticket-r0ap52.jpg" class="card-img"/>
+                        <img src="../../img/ticketpunteado.png" class="card-img"/>
                             <div class="card-img-overlay">
                                 <h5 class="card-title">Card title</h5>
                             </div>
