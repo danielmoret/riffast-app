@@ -11,10 +11,10 @@ export const Navbar = () => {
         </Link>
         <div className="ml-auto d-flex gap-2">
           <Link to="/login">
-            <button className="btn btn-success login">Login</button>
+            <button className="btn login">Login</button>
           </Link>
           <Link to="/signup">
-            <button className="btn btn-success register">Registro</button>
+            <button className="btn  register">Registro</button>
           </Link>
         </div>
       </div>

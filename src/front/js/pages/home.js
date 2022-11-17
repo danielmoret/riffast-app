@@ -6,18 +6,7 @@ import "../../styles/home.css";
 export const Home = () => {
   return (
     <>
-      <div
-        /* style={{
-          backgroundImage: `url(${homeImage})`,
-          height: "80vh",
-          width: "100%",
-          padding: "30px",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-        }} */
-        className="d-flex align-items-center landing"
-      >
+      <div className="d-flex align-items-center landing">
         <div className="content-overlay">
           <div className="text-overlay">
             Olvida ya esos talonarios de papel.&nbsp;
