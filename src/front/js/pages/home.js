@@ -4,11 +4,6 @@ import homeImage from "../../img/landingHome.png";
 import "../../styles/home.css";
 
 export const Home = () => {
-<<<<<<< HEAD
-  const { store, actions } = useContext(Context);
-
-  return <></>;
-=======
   return (
     <>
       <div className="d-flex align-items-center landing">
@@ -29,5 +24,4 @@ export const Home = () => {
       </div>
     </>
   );
->>>>>>> 1bae37ae9bebc4e564a9bb5c472c928d5621328b
 };
