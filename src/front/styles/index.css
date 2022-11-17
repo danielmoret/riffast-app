@@ -1,3 +1,17 @@
 /* 
     General Styles used on every website (Don't Repeat Yourself)
 */
+.tituloregistro {
+  padding: 5px 0 30px 0;
+}
+
+.formulario {
+  width: 600px;
+  margin: 0 auto;
+}
+
+.boton {
+  background-color: #6dd47e;
+  border-color: #6dd47e;
+  color: #293250;
+}
