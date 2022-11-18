@@ -2,6 +2,44 @@
     General Styles used on every website (Don't Repeat Yourself)
 */
 
+/* boleteo */
+.banda-l {
+  background-color: #fed163;
+  width: 215px;
+  height: 60px;
+  position: absolute;
+  border-radius: 16px 16px 0 0;
+  top: 78px;
+  left: -78px;
+  transform: rotate(-90deg);
+}
+
+.logo-banda-r {
+  background-image: url(../img/rifastblue.png);
+  width: 120px;
+  height: 60px;
+  position: absolute;
+
+  top: 78px;
+  left: -24px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  transform: rotate(-90deg);
+}
+
+.boleto {
+  max-width: 600px;
+  height: 220px;
+  margin: 0 auto;
+
+  background: rgba(255, 255, 255, 0.51);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5.1px);
+  -webkit-backdrop-filter: blur(5.1px);
+  border: 2px solid black;
+}
+
 :root {
   --color-azul: #293250;
   --color-amarillo: #fed163;
@@ -44,6 +82,7 @@
 }
 
 .signup {
+  margin-top: 50px;
   width: 40%;
   margin: 0 auto;
 }

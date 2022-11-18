@@ -11,7 +11,7 @@ import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { RaffleRegistration } from "./pages/raffleRegistration";
 import { Buttons } from "./component/Buttons";
-import { Buy } from "./component/Buy";
+import { Buy } from "./pages/Buy";
 import { Raffler } from "./pages/Raffler";
 import { Signup } from "./pages/Signup";
 import { Login } from "./pages/Login";
