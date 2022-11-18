@@ -309,10 +309,6 @@
   font-weight: bold;
 }
 
-.buying {
-  background-color: var(--color-lima);
-}
-
 .reservation {
   background-color: var(--color-amarillo);
   color: var(--color-azul);
@@ -332,4 +328,10 @@
   background-color: #6dd47e;
   border-color: #6dd47e;
   color: #293250;
+}
+
+.my-button {
+  background-color: var(--color-azul);
+  color: var(--color-amarillo);
+  font-weight: bold;
 }

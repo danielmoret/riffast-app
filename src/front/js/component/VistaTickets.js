@@ -1,5 +1,6 @@
 import React from "react";
 import ticketpunteado from "../../img/ticketpunteado.png";
+import { Buttons } from "./Buttons";
 
 export const VistaTickets = () => {
   return (
