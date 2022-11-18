@@ -1,9 +1,11 @@
 import React from "react";
 import ticketpunteado from "../../img/ticketpunteado.png";
+import { Buttons } from "./Buttons";
 
 export const VistaTickets = () => {
   return (
     <div>
+      <Buttons />
       <div className="d-flex justify-content-center">
         <div className="form-group m-2 select-ticket">
           <label className="form-label">
