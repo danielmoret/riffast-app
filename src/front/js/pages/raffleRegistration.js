@@ -12,7 +12,7 @@ export const RaffleRegistration = () => {
         <form>
           <div className="premio mb-3">
             <label for="exampleInputEmail1" class="form-label">
-              Premio:
+              <strong>Premio:</strong>
             </label>
             <input
               type="premio"
@@ -25,7 +25,7 @@ export const RaffleRegistration = () => {
 
           <div className="precio mb-3">
             <label for="exampleInputEmail1" class="form-label">
-              Precio:
+              <strong>Precio:</strong>
             </label>
             <div className="input-group">
               <span class="input-group-text">$</span>
@@ -42,7 +42,7 @@ export const RaffleRegistration = () => {
 
           <div className="imagen mb-3">
             <label for="formFileMultiple" className="form-label">
-              Imagen del premio:
+              <strong>Imagen del premio:</strong>
             </label>
             <input
               className="form-control"
@@ -54,7 +54,7 @@ export const RaffleRegistration = () => {
 
           <div className="descripcion mb-3">
             <label for="exampleFormControlTextarea1" class="form-label">
-              Descripción:
+              <strong>Descripción:</strong>
             </label>
             <textarea
               className="form-control"
@@ -66,7 +66,7 @@ export const RaffleRegistration = () => {
 
           <div className="fecha mb-3">
             <label for="exampleFormControlTextarea1" class="form-label">
-              Fecha del sorteo:
+              <strong>Fecha del sorteo:</strong>
             </label>
             <div className="input-group">
               <input
@@ -94,7 +94,7 @@ export const RaffleRegistration = () => {
 
           <div className="plataforma mb-3">
             <label for="exampleFormControlTextarea1" class="form-label">
-              Plataforma/Medio donde se realizara el sorteo:
+              <strong>Plataforma/Medio donde se realizara el sorteo:</strong>
             </label>
             <select class="form-select" aria-label="Default select example">
               <option selected>Seleccione una plataforma/medio</option>
@@ -103,12 +103,13 @@ export const RaffleRegistration = () => {
               <option value="3">Facebook</option>
               <option value="4">Youtube</option>
               <option value="5">Twitch</option>
+              <option value="6">Loteria</option>
             </select>
           </div>
 
           <div className="metododepago mb-3">
             <label for="exampleFormControlTextarea1" class="form-label">
-              Método de pago:
+              <strong>Método de pago:</strong>
             </label>
             <select class="form-select" aria-label="Default select example">
               <option selected>Seleccione un método de pago</option>
@@ -121,7 +122,7 @@ export const RaffleRegistration = () => {
           </div>
 
           <div className="d-grid gap-2">
-            <button type="button" className="btn boton">
+            <button type="button" className="btn boton btn-primary btn-signup">
               Crear talonario
             </button>
           </div>
