@@ -1,14 +1,11 @@
 import React from "react";
+import { Boleto } from "../component/Boleto.js";
 import { Buttons } from "../component/Buttons.js";
 import { VistaTickets } from "../component/VistaTickets.js";
 
 export const Buy = () => {
   return (
     <div>
-      
-      
-      
-      
       <Buttons />
       {/* <div
         className="buy container container-fluid text-center p-3 mt-2 text-black rounded"
