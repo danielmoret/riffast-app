@@ -294,3 +294,9 @@
   border-color: #6dd47e;
   color: #293250;
 }
+
+.my-button {
+  background-color: var(--color-azul);
+  color: var(--color-amarillo);
+  font-weight: bold;
+}
