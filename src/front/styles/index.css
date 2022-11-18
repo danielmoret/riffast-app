@@ -20,6 +20,16 @@
   border: 0;
 }
 
+.landing {
+  background-image: url("../img/landingHome.png");
+  height: 80vh;
+  width: 100%;
+  padding: 30px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .login {
   background-color: var(--color-azul);
   border-color: #293250;
@@ -30,16 +40,11 @@
 .login:hover {
   background-color: var(--color-azul);
   border-color: #293250;
-}
-
-.logo_signup {
-  width: 300px;
-  height: 300px;
-  background-color: blue;
+  color: #fed163;
 }
 
 .signup {
-  width: 500px;
+  width: 40%;
   margin: 0 auto;
 }
 
@@ -89,6 +94,7 @@
 .register:hover {
   background-color: var(--color-lima);
   border-color: var(--color-lima);
+  color: #293250;
 }
 
 .leyenda {
@@ -112,12 +118,42 @@
   border: 1px solid #fed163;
 }
 
-.landing {
-  background-image: url("../img/landingHome.png");
-  height: 100vh;
+.vista-tickets {
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 10px;
+  background: #fed163;
+  padding: 10px;
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5.1px);
+  -webkit-backdrop-filter: blur(5.1px);
+  border: 1px solid #fed163;
+}
+
+.ticket-punteado {
+  background-image: url("../img/ticketpunteado.png");
+  width: 150px;
+  height: 75px;
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
+}
+
+.ticket-pagado {
+  background-image: url("../img/ticketpagado.png");
+  width: 150px;
+  height: 75px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.btn-eliminar-ticket {
+  background-color: #293250;
+  color: #fed163;
+  border-radius: 10px;
+  border-color: #293250;
 }
 
 .content-overlay {
@@ -195,6 +231,32 @@
   padding: 10px;
 }
 
+.form-reserva-ticket {
+  width: 40%;
+  margin: 0 auto;
+}
+
+.select-ticket {
+  color: #293250;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  background-color: #fed163;
+  padding: 15px;
+  border-radius: 16px;
+}
+
+.dropdown-ticket {
+  border-radius: 10px;
+  border-color: #293250;
+}
+
+.btn-reserva {
+  background-color: #293250;
+  color: #fed163;
+  font-weight: bold;
+}
+
 .buyer,
 .checker {
   background-color: var(--color-lima);
@@ -211,5 +273,26 @@
 .reservation {
   background-color: var(--color-amarillo);
   color: var(--color-azul);
+  font-weight: bold;
+}
+
+.tituloregistro {
+  padding: 5px 0 30px 0;
+}
+
+.formulario {
+  width: 600px;
+  margin: 0 auto;
+}
+
+.boton {
+  background-color: #6dd47e;
+  border-color: #6dd47e;
+  color: #293250;
+}
+
+.my-button {
+  background-color: var(--color-azul);
+  color: var(--color-amarillo);
   font-weight: bold;
 }
