@@ -15,7 +15,7 @@ export const Buy = () => {
             Ingresa el número o email registrado en la rifa
           </label>
           <input className="form-control mb-3" aria-label="Default" />
-          <button className="my-button rounded">Consultar</button>
+          <button className="my-button btn rounded">Consultar</button>
         </div>
       </div>
 
