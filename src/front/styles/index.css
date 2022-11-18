@@ -328,7 +328,7 @@
 }
 
 .formulario {
-  width: 600px;
+  width: 40%;
   margin: 0 auto;
 }
 
@@ -336,6 +336,33 @@
   background-color: #6dd47e;
   border-color: #6dd47e;
   color: #293250;
+}
+
+footer {
+  display: flex;
+  justify-content: space-around;
+}
+
+.iconos {
+  margin: 5px;
+  font-size: 30px;
+}
+
+.locationf {
+  font-size: 20px;
+}
+
+h5 {
+  margin: 20px 20px 10px 20px;
+}
+
+footer {
+  background-color: #293250;
+  color: white;
+}
+
+i {
+  margin: 5px;
 }
 
 .my-button {
