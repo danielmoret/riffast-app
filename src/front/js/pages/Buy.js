@@ -9,22 +9,8 @@ export const Buy = () => {
   return (
     <div>
       <Boleto />
-      <div className="container text-center d-flex justify-content-evenly mt-5 ps-2">
-        <button
-          type="button"
-          className="buyer btn-lg btn"
-          onClick={() => setBuySelect("comprar")}
-        >
-          Compra tu ticket
-        </button>
-        <button
-          type="button"
-          className="checker btn-lg btn"
-          onClick={() => setBuySelect("revisar")}
-        >
-          Revisar estado de mis tickets
-        </button>
-      </div>
+    
+    <Buttons setBuySelect = {setBuySelect} />
 
       {buySelect === "comprar" ? (
         <>
