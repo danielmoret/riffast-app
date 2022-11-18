@@ -82,6 +82,7 @@
 }
 
 .signup {
+  margin-top: 50px;
   width: 40%;
   margin: 0 auto;
 }
@@ -161,7 +162,7 @@
   margin: 0 auto;
   margin-top: 10px;
   background: #fed163;
-  padding: 10px;
+  padding: 15px;
   border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(5.1px);
@@ -308,10 +309,6 @@
   font-weight: bold;
 }
 
-.buying {
-  background-color: var(--color-lima);
-}
-
 .reservation {
   background-color: var(--color-amarillo);
   color: var(--color-azul);
@@ -331,4 +328,10 @@
   background-color: #6dd47e;
   border-color: #6dd47e;
   color: #293250;
+}
+
+.my-button {
+  background-color: var(--color-azul);
+  color: var(--color-amarillo);
+  font-weight: bold;
 }
