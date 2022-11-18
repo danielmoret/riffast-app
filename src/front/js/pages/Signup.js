@@ -5,18 +5,18 @@ export const Signup = () => {
     <div className="mt-5 signup">
       <h1 className="text-center">Registrate para crear tu rifa</h1>
       <form>
-        <div className="form-group">
-          <label className="form-label">Nombre Completo</label>
+        <div className="form-group mt-4 mb-3">
+          <label className="form-label fw-bold">Nombre Completo</label>
           <input className="form-control" type="text" />
         </div>
 
-        <div className="form-group">
-          <label className="form-label">Email</label>
+        <div className="form-group mb-3">
+          <label className="form-label fw-bold">Email</label>
           <input className="form-control" type="email" />
         </div>
 
-        <div className="form-group">
-          <label className="form-label">Teléfono</label>
+        <div className="form-group mb-3">
+          <label className="form-label fw-bold">Teléfono</label>
           <input
             className="form-control"
             type="text"
@@ -24,8 +24,8 @@ export const Signup = () => {
           />
         </div>
 
-        <div className="form-group">
-          <label className="form-label">Contraseña</label>
+        <div className="form-group mb-3">
+          <label className="form-label fw-bold">Contraseña</label>
           <input className="form-control" type="password" />
         </div>
         <div className="mb-3 form-check">

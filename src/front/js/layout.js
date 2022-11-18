@@ -11,10 +11,11 @@ import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { RaffleRegistration } from "./pages/raffleRegistration";
 import { Buttons } from "./component/Buttons";
-import { Buy } from "./component/Buy";
+import { Buy } from "./pages/Buy";
 import { Raffler } from "./pages/Raffler";
 import { Signup } from "./pages/Signup";
 import { Login } from "./pages/Login";
+import { VistaTickets } from "./component/VistaTickets";
 
 //create your first component
 const Layout = () => {
@@ -39,6 +40,7 @@ const Layout = () => {
             <Route element={<Demo />} path="/demo" />
             <Route element={<Single />} path="/single/:theid" />
             <Route element={<Buy />} path="/buy" />
+            <Route element={<VistaTickets />} path="/vistatickets" />
             <Route element={<h1>Not found!</h1>} />
           </Routes>
           <Footer />
