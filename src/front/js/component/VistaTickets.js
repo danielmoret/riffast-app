@@ -11,7 +11,7 @@ export const VistaTickets = () => {
         </button>
       </div>
 
-      <div className="vista-tickets d-flex justify-content-around flex-wrap gap-2">
+      <div className="vista-tickets d-flex justify-content-around flex-wrap gap-2 mt-3">
         <div className="d-flex flex-column align-items-center">
           <div className="ticket-punteado d-flex justify-content-around align-items-center">
             <span
