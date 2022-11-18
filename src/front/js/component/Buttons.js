@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Buy } from "./Buy";
-import { VistaTickets } from "./VistaTickets";
+
 
 export const Buttons = () => {
   return (
