@@ -9,16 +9,6 @@ export const Buy = () => {
       <Boleto />
       <Buttons />
 
-      <div className="d-flex justify-content-center">
-        <div className="form-group m-2 select-ticket">
-          <label className="form-label">
-            Ingresa el número o email registrado en la rifa
-          </label>
-          <input className="form-control mb-3" aria-label="Default" />
-          <button className="my-button rounded">Consultar</button>
-        </div>
-      </div>
-
       <div className="mt-5 signup form-reserva-ticket">
         <div className="form-group mb-2 select-ticket">
           <label className="form-label">Elige tu ticket</label>
@@ -74,7 +64,7 @@ export const Buy = () => {
           />
         </form>
       </div>
-      <VistaTickets />
+      {/* <VistaTickets /> */}
     </div>
   );
 };

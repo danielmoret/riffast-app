@@ -1,10 +1,24 @@
 import React from "react";
 import ticketpunteado from "../../img/ticketpunteado.png";
 import { Buttons } from "./Buttons";
+import { Boleto } from "./Boleto";
 
 export const VistaTickets = () => {
   return (
     <>
+      <Boleto />
+      <Buttons />
+
+      <div className="d-flex justify-content-center mt-5">
+        <div className="form-group m-2 select-ticket">
+          <label className="form-label">
+            Ingresa el número o email registrado en la rifa
+          </label>
+          <input className="form-control mb-3" aria-label="Default" />
+          <button className="my-button rounded">Consultar</button>
+        </div>
+      </div>
+
       <div className="text-center mt-5">
         <button className="btn register p-2">
           Contactar responsable de la rifa
