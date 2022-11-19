@@ -7,7 +7,7 @@ export const RaffleRegistration = () => {
 
   return (
     <>
-      <div className="mt-5 formulario">
+      <div className="mt-5 formulario mb-5">
         <h1 className="tituloregistro text-center">Registro de rifa</h1>
         <form>
           <div className="premio mb-3">

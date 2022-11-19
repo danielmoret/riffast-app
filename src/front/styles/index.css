@@ -1,6 +1,11 @@
 /* 
     General Styles used on every website (Don't Repeat Yourself)
 */
+:root {
+  --color-azul: #293250;
+  --color-amarillo: #fed163;
+  --color-lima: #6dd47e;
+}
 
 /* boleteo */
 .banda-l {
@@ -38,12 +43,6 @@
   backdrop-filter: blur(5.1px);
   -webkit-backdrop-filter: blur(5.1px);
   border: 2px solid black;
-}
-
-:root {
-  --color-azul: #293250;
-  --color-amarillo: #fed163;
-  --color-lima: #6dd47e;
 }
 
 .logo {

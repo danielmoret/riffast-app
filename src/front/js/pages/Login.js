@@ -1,8 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export const Login = () => {
   return (
-    <div className="mt-5 signup">
+    <div className="mt-5 signup mb-5">
       <h1 className="text-center">Bienvenido</h1>
       <form>
         <div className="form-group mb-2">
@@ -20,8 +21,14 @@ export const Login = () => {
           type="submit"
           value="Ingresa ya!"
         />
-        <div className="text-center">
-          ¿No tienes cuenta? <strong>Registrate</strong>
+        <div className="text-center mt-2">
+          ¿No tienes cuenta?&nbsp;
+          <Link
+            to="/signup"
+            style={{ textDecoration: "none", color: "#293250" }}
+          >
+            <strong>Registrate</strong>
+          </Link>
         </div>
       </form>
     </div>

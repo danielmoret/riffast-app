@@ -41,7 +41,7 @@ export const Raffler = () => {
   return (
     <>
       <Boleto />
-      <div className="text-center mt-5">
+      <div className="text-center mt-5 mb-5">
         <h1>Tickets</h1>
         <LeyendaNumeros />
         <div className="talonario d-flex flex-wrap justify-content-center p-2 gap-2">

@@ -7,7 +7,7 @@ export const Buy = () => {
   const [buySelect, setBuySelect] = useState("");
 
   return (
-    <div>
+    <div className="min-vh-100 mb-5">
       <Boleto />
 
       <Buttons setBuySelect={setBuySelect} />
