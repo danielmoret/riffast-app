@@ -23,7 +23,7 @@ export const VistaTickets = () => {
           <span>
             <strong>Estatus</strong>: Por pagar
           </span>
-          <button className="btn-eliminar-ticket">Eliminar</button>
+          <button className="btn-eliminar-ticket btn">Eliminar</button>
         </div>
 
         <div className="d-flex flex-column align-items-center">
@@ -76,7 +76,7 @@ export const VistaTickets = () => {
           <span>
             <strong>Estatus</strong>: Por pagar
           </span>
-          <button className="btn-eliminar-ticket">Eliminar</button>
+          <button className="btn-eliminar-ticket btn">Eliminar</button>
         </div>
       </div>
     </>

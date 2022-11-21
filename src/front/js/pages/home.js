@@ -17,7 +17,7 @@ export const Home = () => {
           </div>
           <Link to="/signup">
             <button className="button-overlay btn btn-success mt-4">
-              Crea tu rifa ya!
+              ¡Crea tu rifa ya!
             </button>
           </Link>
         </div>

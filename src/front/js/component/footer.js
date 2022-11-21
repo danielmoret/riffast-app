@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 
 export const Footer = () => (
-  <footer className="footer text-center">
+  <footer className="footer text-center mt-auto">
     <div>
-      <h5>TECNOLOGY'S</h5>
+      <h5>TECHNOLOGIES</h5>
       <p className="iconos">
         <i class="fa-brands fa-html5"></i>
         <i class="fa-brands fa-css3-alt"></i>
@@ -18,7 +18,7 @@ export const Footer = () => (
     </div>
 
     <div>
-      <h5>AROUN THE WEB</h5>
+      <h5>AROUND THE WEB</h5>
       <p className="iconos">
         <i class="fa-brands fa-instagram"></i>
         <i class="fa-brands fa-twitter"></i>

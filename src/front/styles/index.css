@@ -1,14 +1,19 @@
 /* 
     General Styles used on every website (Don't Repeat Yourself)
 */
+:root {
+  --color-azul: #293250;
+  --color-amarillo: #fed163;
+  --color-lima: #6dd47e;
+}
 
 /* boleteo */
 .banda-l {
   background-color: #fed163;
-  width: 215px;
+  width: 216px;
   height: 60px;
   position: absolute;
-  border-radius: 16px 16px 0 0;
+  border-radius: 13px 13px 0 0;
   top: 78px;
   left: -78px;
   transform: rotate(-90deg);
@@ -38,12 +43,6 @@
   backdrop-filter: blur(5.1px);
   -webkit-backdrop-filter: blur(5.1px);
   border: 2px solid black;
-}
-
-:root {
-  --color-azul: #293250;
-  --color-amarillo: #fed163;
-  --color-lima: #6dd47e;
 }
 
 .logo {
@@ -82,9 +81,9 @@
 }
 
 .signup {
-  margin-top: 50px;
   width: 40%;
   margin: 0 auto;
+  margin-bottom: 7rem;
 }
 
 .btn-signup {
@@ -191,8 +190,12 @@
 .btn-eliminar-ticket {
   background-color: #293250;
   color: #fed163;
-  border-radius: 10px;
+  border-radius: 4px;
   border-color: #293250;
+}
+
+.btn-eliminar-ticket:hover {
+  color: #fed163;
 }
 
 .content-overlay {
@@ -294,6 +297,10 @@
   background-color: #293250;
   color: #fed163;
   font-weight: bold;
+}
+
+.btn-reserva:hover {
+  color: var(--color-amarillo);
 }
 
 .buyer,

@@ -7,24 +7,10 @@ export const Buy = () => {
   const [buySelect, setBuySelect] = useState("");
 
   return (
-    <div>
+    <div className="min-vh-100 mb-5">
       <Boleto />
-      <div className="container text-center d-flex justify-content-evenly mt-5 ps-2">
-        <button
-          type="button"
-          className="buyer btn-lg btn"
-          onClick={() => setBuySelect("comprar")}
-        >
-          Compra tu ticket
-        </button>
-        <button
-          type="button"
-          className="checker btn-lg btn"
-          onClick={() => setBuySelect("revisar")}
-        >
-          Revisar estado de mis tickets
-        </button>
-      </div>
+
+      <Buttons setBuySelect={setBuySelect} />
 
       {buySelect === "comprar" ? (
         <>
@@ -33,7 +19,8 @@ export const Buy = () => {
               <label className="form-label">Elige tu ticket</label>
               <select
                 className="form-select mb-3 dropdown-ticket"
-                aria-label="Default select example">
+                aria-label="Default select example"
+              >
                 <option selected>Selecciona tu número</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -47,7 +34,8 @@ export const Buy = () => {
                 <input
                   className="form-control"
                   type="text"
-                  placeholder="Nombre y apellido"/>
+                  placeholder="Nombre y apellido"
+                />
               </div>
 
               <div className="form-group mb-2 fw-bold">
@@ -55,7 +43,8 @@ export const Buy = () => {
                 <input
                   className="form-control"
                   type="text"
-                  placeholder="ej. 04241111111"/>
+                  placeholder="ej. 04241111111"
+                />
               </div>
 
               <div className="form-group mb-3 fw-bold">
@@ -64,16 +53,20 @@ export const Buy = () => {
               </div>
 
               <div className="mb-3 form-check">
-                <input  type="checkbox"
-                        className="form-check-input"
-                        id="exampleCheck1"/>
+                <input
+                  type="checkbox"
+                  className="form-check-input"
+                  id="exampleCheck1"
+                />
                 <label className="form-check-label" htmlFor="exampleCheck1">
                   Acepto la Política de privacidad y Condiciones de uso
                 </label>
               </div>
-              <input  className="btn  w-100 btn-reserva"
-                      type="submit"
-                      value="¡Reserva ya!"/>
+              <input
+                className="btn  w-100 btn-reserva"
+                type="submit"
+                value="¡Reserva ya!"
+              />
             </form>
           </div>
         </>
