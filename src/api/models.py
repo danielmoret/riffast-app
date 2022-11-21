@@ -17,3 +17,15 @@ class User(db.Model):
             "email": self.email,
             # do not serialize the password, its a security breach
         }
+
+class Ticket(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    numero = db.Column(db.Integer, nullable=False)
+    talonario_id = db.Column(db.Integer, ForeignKey('user_talonario.id'))
+    user_ticket_id = db.Column(db.Integer, ForeignKey('user_ticket.id'))
+
+    def serialize(self):
+        return{
+            "id": self.id,
+            "numero": self.numero
+        }
