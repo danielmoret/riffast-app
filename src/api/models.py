@@ -2,6 +2,20 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
+
+class Ticket(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    numero = db.Column(db.Integer, nullable=False)
+    talonario_id = db.Column(db.Integer, ForeignKey('talonario.id'))
+    user_ticket_id = db.Column(db.Integer, ForeignKey('user_ticket.id'))
+    
+     def serialize(self):
+        return {
+          "id": self.id,
+           "numero": self.numero
+        }
+    
+
 class User_talonario(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     full_name = db.Column(db.String(200), unique=False, nullable=False)
@@ -51,10 +65,10 @@ class User_ticket(db.model):
     email = db.Column(db.String(100))
 
     def serialize(self):
-        return {
+        return{
             "id": self.id,
             "full_name": self.full_name,
             "phone": self.phone,
             "email": self.email
-            # do not serialize the password, its a security breach
+
         }
