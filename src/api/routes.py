@@ -16,3 +16,35 @@ def handle_hello():
     }
 
     return jsonify(response_body), 200
+
+#Talonarioss
+@api.route('/talonario', methods=['POST', 'GET'])
+def get_talonarios():
+
+    if request.method == "GET" :
+        talonarios = Talonario.query.all()
+        talonarios_dictionaries = []
+
+        for talonario in talonarios :
+        talonarios_disctionaries.append(talonario.serialize())
+
+        return jsonify(talonarios_disctionaries), 200
+    
+    new_talonario_data = request.json
+
+    try: 
+        new_talonario = Talonario.create(**new_talonario_data)
+        return jsonify(new_talonario.serialize()), 201
+    except Exception as error:
+        return jsonify(error.args[0]),error.args[1] if len(error.args) > 1 else 500
+
+#Talonario especifico
+@api.route('/talonario/<int:talonario_id>', methods=['GET'])
+def get_talonario(talonario_id):
+
+        talonario = Talonario.query.filter_by(id = talonario_id)
+        try:
+            return jsonify(talonario[0].serialize())
+        except Exception as error:
+            return jsonify({"msg": "El talonario no existe"})
+    
