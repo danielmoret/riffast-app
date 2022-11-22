@@ -9,7 +9,7 @@ class Ticket(db.Model):
     talonario_id = db.Column(db.Integer, ForeignKey('talonario.id'))
     user_ticket_id = db.Column(db.Integer, ForeignKey('user_ticket.id'))
     
-     def serialize(self):
+    def serialize(self):
         return {
           "id": self.id,
            "numero": self.numero
