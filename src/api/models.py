@@ -9,7 +9,7 @@ class User_talonario(db.Model):
     email = db.Column(db.String(200), unique=True, nullable=False)
     password = db.Column(db.String(80), unique=False, nullable=False)
     
-     def serialize(self):
+    def serialize(self):
       return {
           "id": self.id,
          "full_name": self.full_name,
