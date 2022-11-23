@@ -1,4 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
+import re
 
 db = SQLAlchemy()
 
@@ -61,8 +62,19 @@ class Talonario(db.Model):
 class User_ticket(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     full_name = db.Column(db.String(120), nullable=False)
-    phone = db.Column(db.String(20),nullable=False)
-    email = db.Column(db.String(100))
+    phone = db.Column(db.String(20), unique=True, nullable=False)
+    email = db.Column(db.String(100), unique=True)
+
+    @classmethod
+    def create(cls, **kwargs):
+        new_user = cls(**kwargs)
+        db.session.add(new_user) # INSERT INTO
+
+        try:
+            db.session.commit() # Se ejecuta el INSERT INTO
+            return new_user
+        except Exception as error:
+            raise Exception(error.args[0],400)
 
     def serialize(self):
         return{
@@ -72,3 +84,4 @@ class User_ticket(db.Model):
             "email": self.email
 
         }
+    
