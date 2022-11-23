@@ -65,6 +65,11 @@ class User_ticket(db.Model):
     phone = db.Column(db.String(20), unique=True, nullable=False)
     email = db.Column(db.String(100), unique=True)
 
+    def __init__(self, **kwargs):
+        self.full_name = kwargs['full_name']
+        self.phone = kwargs['phone']
+        self.email = kwargs['email']
+
     @classmethod
     def create(cls, **kwargs):
         new_user = cls(**kwargs)
