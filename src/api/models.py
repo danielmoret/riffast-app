@@ -6,8 +6,8 @@ db = SQLAlchemy()
 class Ticket(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     numero = db.Column(db.Integer, nullable=False)
-    talonario_id = db.Column(db.Integer, ForeignKey('talonario.id'))
-    user_ticket_id = db.Column(db.Integer, ForeignKey('user_ticket.id'))
+    talonario_id = db.Column(db.Integer, db.ForeignKey('talonario.id'))
+    user_ticket_id = db.Column(db.Integer, db.ForeignKey('user_ticket.id'))
     
     def serialize(self):
         return {
@@ -16,7 +16,7 @@ class Ticket(db.Model):
         }
     
 
-class User_talonario(db.Model):
+class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     full_name = db.Column(db.String(200), unique=False, nullable=False)
     phone = db.Column(db.String(20), unique=True, nullable=False)
@@ -35,13 +35,13 @@ class Talonario(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(200), unique=False, nullable=False)
     premio = db.Column(db.String(200), unique=False, nullable=False)
-    precio = db.Column(db-Float(10), unique=False, nullable=False)
+    precio = db.Column(db.Float(10), unique=False, nullable=False)
     imagen_premio = db.Column(db.String(200), unique=False, nullable=False)
     descripcion = db.Column(db.String(300), unique=False, nullable=False)
-    fecha_sorteo = db.Column(db.dateTime, nullable=False)
+    fecha_sorteo = db.Column(db.Date, nullable=False)
     plataforma_sorteo = db.Column(db.String(100), unique=False, nullable=False)
     metodo_de_pago = db.Column(db.String(100), unique=False, nullable=False)
-    user_talonario_id = db.Column(db.Integer, ForeignKey('user_talonario.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def serialize(self):
         return {
@@ -58,7 +58,7 @@ class Talonario(db.Model):
             # do not serialize the password, its a security breach
         }
 
-class User_ticket(db.model):
+class User_ticket(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     full_name = db.Column(db.String(120), nullable=False)
     phone = db.Column(db.String(20),nullable=False)

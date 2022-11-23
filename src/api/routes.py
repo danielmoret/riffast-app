@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Ticket, User_talonario, Talonario, User_ticket
+from api.models import db, User, Ticket, Talonario, User_ticket
 from api.utils import generate_sitemap, APIException
 
 api = Blueprint('api', __name__)
@@ -61,7 +61,7 @@ def login_talonario():
     
     email = request.json.get("email", None)
     password = request.json.get("password", None)
-    user = User_talonario.query.filter_by(email=email, password=password).first()
+    user = User.query.filter_by(email=email, password=password).first()
     if user is None : 
         return jsonify({"msg":"El usuario o la contraseña son incorrectos"}), 401
     return jsonify({"msg":"Si funciona!!!"}), 200
@@ -70,7 +70,7 @@ def login_talonario():
 def signup_talonario():
 
     if request.method == "GET" : 
-        users = User_talonario.query.all()
+        users = User.query.all()
         users_dictionaries = []
 
         for user in users : 
@@ -89,7 +89,7 @@ def signup_talonario():
         if "password" not in new_user_data or new_user_data["password"] == "" :
             raise Exception("No existe contraseña")
 
-        new_user = User_talonario.create(**new_user_data)
+        new_user = User.create(**new_user_data)
         return jsonify(new_user.serialize()), 200
     
     except Exception as error:
