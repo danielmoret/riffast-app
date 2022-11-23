@@ -11,7 +11,7 @@ export const RaffleRegistration = () => {
 
   return (
     <>
-      <div className="mt-5 formulario mb-5">
+      <div className="mt-5 mb-5 formulario min-vh-100">
         <h1 className="tituloregistro text-center">Registro de rifa</h1>
 
         <form onSubmit={sendData}>
