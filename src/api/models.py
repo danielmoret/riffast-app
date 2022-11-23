@@ -11,8 +11,8 @@ class Ticket(db.Model):
     
     def serialize(self):
         return {
-          "id": self.id,
-           "numero": self.numero
+        "id": self.id,
+        "numero": self.numero
         }
     
 
@@ -24,12 +24,12 @@ class User_talonario(db.Model):
     password = db.Column(db.String(80), unique=False, nullable=False)
     
     def serialize(self):
-      return {
-          "id": self.id,
-         "full_name": self.full_name,
-          "phone": self.phone,
-          "email": self.email,
-      }
+        return {
+        "id": self.id,
+        "full_name": self.full_name,
+        "phone": self.phone,
+        "email": self.email,
+        }
     
 class Talonario(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -61,7 +61,7 @@ class Talonario(db.Model):
 class User_ticket(db.model):
     id = db.Column(db.Integer, primary_key=True)
     full_name = db.Column(db.String(120), nullable=False)
-    phone = db.Column(db.String(20), unique=True, nullable=False)
+    phone = db.Column(db.String(20),nullable=False)
     email = db.Column(db.String(100))
 
     def serialize(self):
