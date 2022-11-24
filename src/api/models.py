@@ -25,6 +25,23 @@ class User(db.Model):
     phone = db.Column(db.String(20), unique=True, nullable=False)
     email = db.Column(db.String(200), unique=True, nullable=False)
     password = db.Column(db.String(80), unique=False, nullable=False)
+
+    def __init__(self, **kwargs):
+        self.full_name = kwargs['full_name']
+        self.phone = kwargs['phone']
+        self.email = kwargs['email']
+        self.password = kwargs['password']
+
+    @classmethod
+    def create(cls, **kwargs):
+        new_user = cls(**kwargs)
+        db.session.add(new_user) 
+
+        try:
+            db.session.commit() 
+            return new_user
+        except Exception as error:
+            raise Exception(error.args[0],400)
     
     def serialize(self):
         return {
