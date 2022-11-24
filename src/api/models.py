@@ -73,6 +73,28 @@ class Talonario(db.Model):
     metodo_de_pago = db.Column(db.String(100), unique=False, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
+    def __init__(self, **kwargs):
+        self.nombre = kwargs['nombre']
+        self.premio = kwargs['premio']
+        self.precio = kwargs['precio']
+        self.imagen_premio = kwargs['imagen_premio']
+        self.descripcion = kwargs['descripcion']
+        self.fecha_sorteo = kwargs['fecha_sorteo']
+        self.plataforma_sorteo = kwargs['plataforma_sorteo']
+        self.metodo_de_pago = kwargs['metodo_de_pago']
+        self.user_id = kwargs['user_id']
+
+    @classmethod
+    def create(cls, **kwargs):
+        new_talonario = cls(**kwargs)
+        db.session.add(new_talonario)
+
+        try:
+            db.session.commit()
+            return new_talonario
+        except Exception as error:
+            raise Exception(error.args[0], 400)
+
     def serialize(self):
         return {
             "id": self.id,
