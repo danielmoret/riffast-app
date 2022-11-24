@@ -80,7 +80,7 @@ def signup_talonario():
     
     new_user_data = request.json
     try : 
-        if "full_name" not in new_user_data or new_user_data["name"] == "" :
+        if "full_name" not in new_user_data or new_user_data["full_name"] == "" :
             raise Exception("No existe nombre")
         if "email" not in new_user_data or new_user_data["email"] == "" :
             raise Exception("No existe correo electronico")
