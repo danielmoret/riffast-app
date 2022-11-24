@@ -104,9 +104,9 @@ def get_talonarios():
         talonarios_dictionaries = []
 
         for talonario in talonarios :
-            talonarios_disctionaries.append(talonario.serialize())
+            talonarios_dictionaries.append(talonario.serialize())
 
-        return jsonify(talonarios_disctionaries), 200
+        return jsonify(talonarios_dictionaries), 200
     
     new_talonario_data = request.json
 
