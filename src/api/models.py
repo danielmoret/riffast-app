@@ -10,6 +10,17 @@ class Ticket(db.Model):
     talonario_id = db.Column(db.Integer, db.ForeignKey('talonario.id'))
     user_ticket_id = db.Column(db.Integer, db.ForeignKey('user_ticket.id'))
     
+    @classmethod
+    def create(cls, **kwargs):
+        new_ticket = cls(**kwargs)
+        db.session.add(new_ticket)
+        
+        try:
+            db.session.commit()
+            return new_ticket
+        except Exception as error:
+            raise Exception(error.args[0],400)
+
     def serialize(self):
         return {
         "id": self.id,
@@ -17,7 +28,6 @@ class Ticket(db.Model):
         "talonario_id" : self.talonario_id,
         "user_ticket_id" : self.user_ticket_id
         }
-    
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
