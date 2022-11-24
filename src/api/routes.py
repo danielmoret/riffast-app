@@ -1,10 +1,16 @@
 """
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
+import os
 from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, User, Ticket, Talonario, User_ticket
 from api.utils import generate_sitemap, APIException
+from flask_jwt_extended import create_access_token
+from flask_jwt_extended import get_jwt_identity
+from flask_jwt_extended import jwt_required
 
+
+#Create flask app
 api = Blueprint('api', __name__)
 
 
@@ -61,10 +67,13 @@ def login_talonario():
     
     email = request.json.get("email", None)
     password = request.json.get("password", None)
+
     user = User.query.filter_by(email=email, password=password).first()
     if user is None : 
         return jsonify({"msg":"El usuario o la contraseña son incorrectos"}), 401
-    return jsonify({"msg":"Si funciona!!!"}), 200
+    
+    access_token = create_access_token(identity=user.id)
+    return jsonify({"access_token" : access_token, "user_id":user.id, "user_email":user.email}),200
 
 @api.route("/user-talonario", methods=['GET','POST'])
 def signup_talonario():

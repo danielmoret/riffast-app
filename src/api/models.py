@@ -120,7 +120,7 @@ class User_ticket(db.Model):
     def __init__(self, **kwargs):
         self.full_name = kwargs['full_name']
         self.phone = kwargs['phone']
-        self.email = kwargs['email']
+        self.email = kwargs['email']  if 'email' in kwargs else None
 
     @classmethod
     def create(cls, **kwargs):
