@@ -2,7 +2,7 @@ import React from "react";
 
 export const Signup = () => {
   return (
-    <div className="mt-5 signup mb-5">
+    <div className="mt-5 signup min-vh-100">
       <h1 className="text-center">Registrate para crear tu rifa</h1>
       <form>
         <div className="form-group mt-4 mb-3">

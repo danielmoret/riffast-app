@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export const Login = () => {
   return (
-    <div className="mt-5 signup">
+    <div className="mt-5 signup min-vh-100">
       <h1 className="text-center">Bienvenido</h1>
       <form>
         <div className="form-group mb-2">

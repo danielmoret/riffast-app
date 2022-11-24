@@ -1,17 +1,22 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
 
 export const RaffleRegistration = () => {
   const { store, actions } = useContext(Context);
 
+  const sendData = (event) => {
+    event.preventDefault();
+  };
+
   return (
     <>
-      <div className="mt-5 formulario mb-5">
+      <div className="mt-5 mb-5 formulario min-vh-100">
         <h1 className="tituloregistro text-center">Registro de rifa</h1>
-        <form>
+
+        <form onSubmit={sendData}>
           <div className="premio mb-3">
-            <label for="exampleInputEmail1" class="form-label">
+            <label htmlFor="exampleInputEmail1" className="form-label">
               <strong>Premio:</strong>
             </label>
             <input
@@ -24,12 +29,12 @@ export const RaffleRegistration = () => {
           </div>
 
           <div className="precio mb-3">
-            <label for="exampleInputEmail1" class="form-label">
+            <label htmlFor="exampleInputEmail1" className="form-label">
               <strong>Precio:</strong>
             </label>
             <div className="input-group">
-              <span class="input-group-text">$</span>
-              <span class="input-group-text">0.00</span>
+              <span className="input-group-text">$</span>
+              <span className="input-group-text">0.00</span>
               <input
                 type="text"
                 className="form-control"
@@ -41,7 +46,7 @@ export const RaffleRegistration = () => {
           </div>
 
           <div className="imagen mb-3">
-            <label for="formFileMultiple" className="form-label">
+            <label htmlFor="formFileMultiple" className="form-label">
               <strong>Imagen del premio:</strong>
             </label>
             <input
@@ -53,7 +58,7 @@ export const RaffleRegistration = () => {
           </div>
 
           <div className="descripcion mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">
+            <label htmlFor="exampleFormControlTextarea1" className="form-label">
               <strong>Descripción:</strong>
             </label>
             <textarea
@@ -65,7 +70,7 @@ export const RaffleRegistration = () => {
           </div>
 
           <div className="fecha mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">
+            <label htmlFor="exampleFormControlTextarea1" className="form-label">
               <strong>Fecha del sorteo:</strong>
             </label>
             <div className="input-group">
@@ -93,10 +98,10 @@ export const RaffleRegistration = () => {
           </div>
 
           <div className="plataforma mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">
+            <label htmlFor="exampleFormControlTextarea1" className="form-label">
               <strong>Plataforma/Medio donde se realizara el sorteo:</strong>
             </label>
-            <select class="form-select" aria-label="Default select example">
+            <select className="form-select" aria-label="Default select example">
               <option selected>Seleccione una plataforma/medio</option>
               <option value="1">Instagram</option>
               <option value="2">Twitter</option>
@@ -108,10 +113,10 @@ export const RaffleRegistration = () => {
           </div>
 
           <div className="metododepago mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">
+            <label htmlFor="exampleFormControlTextarea1" className="form-label">
               <strong>Método de pago:</strong>
             </label>
-            <select class="form-select" aria-label="Default select example">
+            <select className="form-select" aria-label="Default select example">
               <option selected>Seleccione un método de pago</option>
               <option value="1">Dolares en efectivo</option>
               <option value="4">Binance</option>
