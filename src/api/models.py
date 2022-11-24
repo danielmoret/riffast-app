@@ -82,7 +82,7 @@ class Talonario(db.Model):
         self.fecha_sorteo = kwargs['fecha_sorteo']
         self.plataforma_sorteo = kwargs['plataforma_sorteo']
         self.metodo_de_pago = kwargs['metodo_de_pago']
-        user_talonario_id = kwargs['user_talonario_id']
+        self.user_id = kwargs['user_id']
 
     @classmethod
     def create(cls, **kwargs):
