@@ -13,7 +13,9 @@ class Ticket(db.Model):
     def serialize(self):
         return {
         "id": self.id,
-        "numero": self.numero
+        "numero": self.numero,
+        "talonario_id" : self.talonario_id,
+        "user_ticket_id" : self.user_ticket_id
         }
     
 
@@ -55,6 +57,7 @@ class Talonario(db.Model):
             "fecha_sorteo": self.fecha_sorteo,
             "plataforma_sorteo": self.plataforma_sorteo,
             "metodo_de_pago": self.metodo_de_pago,
+            "user_id" : self.user_id
         
             # do not serialize the password, its a security breach
         }
