@@ -135,6 +135,9 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
+      obtenerTalonario: () => {
+      }
+
       exampleFunction: () => {
         getActions().changeColor(0, "green");
       },
