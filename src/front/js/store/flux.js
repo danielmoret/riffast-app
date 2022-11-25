@@ -3,6 +3,7 @@ const getState = ({ getStore, getActions, setStore }) => {
     store: {
       token: null,
       message: null,
+      talonarios: [],
       demo: [
         {
           title: "FIRST",
@@ -45,7 +46,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         try {
           const resp = await fetch(
-            `https://3001-4geeksacade-reactflaskh-oq5jaeh2ojf.ws-us77.gitpod.io/api/user-talonario`,
+            `https://3001-luisjaas-riffastapp-7yhm8zeid59.ws-us77.gitpod.io/api/user-talonario`,
             opts
           );
 
@@ -77,7 +78,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         try {
           const resp = await fetch(
-            "https://3001-4geeksacade-reactflaskh-oq5jaeh2ojf.ws-us77.gitpod.io/api/login-talonario",
+            "https://3001-luisjaas-riffastapp-7yhm8zeid59.ws-us77.gitpod.io/api/login-talonario",
             opts
           );
 
@@ -102,9 +103,42 @@ const getState = ({ getStore, getActions, setStore }) => {
         setStore({ token: null });
       },
 
+      crear_talonario: async (nombre, premio, precio, img, descripcion, fecha, plataforma, metodoPago) => {
+        const store = getStore()
+        const opts = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${store.token}` 
+          },
+          body: JSON.stringify({
+            nombre: nombre,
+            premio: premio,
+            precio: precio,
+            imagen_premio: img,
+            descripcion: descripcion,
+            fecha_sorteo: fecha,
+            plataforma_sorteo: plataforma,
+            metodo_de_pago: metodoPago
+          }),
+        };
+        try {
+          const resp= await fetch("https://3001-luisjaas-riffastapp-7yhm8zeid59.ws-us77.gitpod.io/api/talonario", opts)
+          if (!resp.ok)
+            { alert("no se pudo realizar esta accion") }
+            const data = await resp.json()
+            console.log(data)
+            store.talonarios.push(data)
+            setStore({talonarios:store.talonarios})
+        } catch (error) {
+          console.log(error)
+        }
+      },
+
       exampleFunction: () => {
         getActions().changeColor(0, "green");
       },
+
 
       login_ticket: async (correo, telefono) => {
         const opts = {
@@ -115,10 +149,10 @@ const getState = ({ getStore, getActions, setStore }) => {
           body: JSON.stringify({
             correo: correo,
             telefono: telefono,
-          }),
-        };
-
-        try {
+            })
+          };
+          
+           try {
           const resp = await fetch(
             "https://3001-4geeksacade-reactflaskh-oq5jaeh2ojf.ws-us77.gitpod.io/api/login-ticket",
             opts
@@ -137,7 +171,45 @@ const getState = ({ getStore, getActions, setStore }) => {
         } catch (error) {
           console.error("There was been an error login in");
         }
+       },
+      
+
+      buyTickets: async () => {
+        const opts = {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify({
+            full_name: fullName,
+            phone: phone,
+            email: email,
+
+          }),
+        };
+        
+        try{
+           const response = await fetch(
+            "https://3001-4geeksacade-reactflaskh-oq5jaeh2ojf.ws-us77.gitpod.io/api/buy",
+            opts
+          );
+          if (!response.ok) {
+            let msg = await response.json();
+            alert(msg.msg);
+            return false;
+          }
+          const data = await response.json();
+        } catch (error) {
+          console.error(error);
+
+        }
       },
+  
+
+        
+
+         
+          
 
       getMessage: async () => {
         try {

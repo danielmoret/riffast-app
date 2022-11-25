@@ -1,10 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Boleto } from "../component/Boleto.js";
 import { Buttons } from "../component/Buttons.js";
 import { VistaTickets } from "../component/VistaTickets.js";
+import { Context } from  "../store/appContext";
 
 export const Buy = () => {
   const [buySelect, setBuySelect] = useState("");
+  const {store,actions} = useContext(Context);
+  const [fullName, setFullName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+
+  const sendData = (e) => {
+    e.preventDefault()
+    actions.buyTickets(fullName,phone,email)
+  }
 
   const [correo, setCorreo] = useState("");
   const consultar = (correo) => {};
@@ -30,10 +40,12 @@ export const Buy = () => {
               </select>
             </div>
             <h3 className="text-center">Completa tus datos</h3>
-            <form>
+            <form onSubmit={sendData}>
               <div className="form-group mb-2">
                 <label className="form-label fw-bold">Nombre Completo</label>
                 <input
+                  value ={fullName}
+                  onChange ={(e)=> setFullName(e.target.value)}
                   className="form-control"
                   type="text"
                   placeholder="Nombre y apellido"
@@ -43,6 +55,8 @@ export const Buy = () => {
               <div className="form-group mb-2 fw-bold">
                 <label className="form-label">Teléfono</label>
                 <input
+                  value ={phone}
+                  onChange ={(e)=> setPhone(e.target.value)}
                   className="form-control"
                   type="text"
                   placeholder="ej. 04241111111"
@@ -51,7 +65,11 @@ export const Buy = () => {
 
               <div className="form-group mb-3 fw-bold">
                 <label className="form-label">Email (opcional)</label>
-                <input className="form-control" type="email" />
+                <input
+                  value={email}
+                  onChange={(e)=> setEmail(e.target.value)} 
+                  className="form-control" 
+                  type="email" />
               </div>
 
               <div className="mb-3 form-check">
