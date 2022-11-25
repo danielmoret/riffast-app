@@ -106,6 +106,7 @@ def signup_talonario():
         
 #Talonarios
 @api.route('/talonario', methods=['POST', 'GET'])
+@jwt_required()
 def get_talonarios():
 
     if request.method == "GET" :
@@ -119,8 +120,10 @@ def get_talonarios():
     
     new_talonario_data = request.json
 
+    user_id = get_jwt_identity()
+
     try: 
-        new_talonario = Talonario.create(**new_talonario_data)
+        new_talonario = Talonario.create(**new_talonario_data, user_id = user_id)
         return jsonify(new_talonario.serialize()), 201
     except Exception as error:
         return jsonify(error.args[0]),error.args[1] if len(error.args) > 1 else 500
