@@ -46,7 +46,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         try {
           const resp = await fetch(
-            `https://3001-luisjaas-riffastapp-7yhm8zeid59.ws-us77.gitpod.io/api/user-talonario`,
+            `${process.env.BACKEND_URL}/api/user-talonario`,
             opts
           );
 
@@ -78,7 +78,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         try {
           const resp = await fetch(
-            "https://3001-luisjaas-riffastapp-7yhm8zeid59.ws-us77.gitpod.io/api/login-talonario",
+            `${process.env.BACKEND_URL}/api/login-talonario`,
             opts
           );
 
@@ -103,13 +103,22 @@ const getState = ({ getStore, getActions, setStore }) => {
         setStore({ token: null });
       },
 
-      crear_talonario: async (nombre, premio, precio, img, descripcion, fecha, plataforma, metodoPago) => {
-        const store = getStore()
+      crear_talonario: async (
+        nombre,
+        premio,
+        precio,
+        img,
+        descripcion,
+        fecha,
+        plataforma,
+        metodoPago
+      ) => {
+        const store = getStore();
         const opts = {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${store.token}` 
+            Authorization: `Bearer ${store.token}`,
           },
           body: JSON.stringify({
             nombre: nombre,
@@ -119,26 +128,29 @@ const getState = ({ getStore, getActions, setStore }) => {
             descripcion: descripcion,
             fecha_sorteo: fecha,
             plataforma_sorteo: plataforma,
-            metodo_de_pago: metodoPago
+            metodo_de_pago: metodoPago,
           }),
         };
         try {
-          const resp= await fetch("https://3001-luisjaas-riffastapp-7yhm8zeid59.ws-us77.gitpod.io/api/talonario", opts)
-          if (!resp.ok)
-            { alert("no se pudo realizar esta accion") }
-            const data = await resp.json()
-            console.log(data)
-            store.talonarios.push(data)
-            setStore({talonarios:store.talonarios})
+          const resp = await fetch(
+            `${process.env.BACKEND_URL}/api/talonario`,
+            opts
+          );
+          if (!resp.ok) {
+            alert("no se pudo realizar esta accion");
+          }
+          const data = await resp.json();
+          console.log(data);
+          store.talonarios.push(data);
+          setStore({ talonarios: store.talonarios });
         } catch (error) {
-          console.log(error)
+          console.log(error);
         }
       },
 
       exampleFunction: () => {
         getActions().changeColor(0, "green");
       },
-
 
       login_ticket: async (correo, telefono) => {
         const opts = {
@@ -149,12 +161,12 @@ const getState = ({ getStore, getActions, setStore }) => {
           body: JSON.stringify({
             correo: correo,
             telefono: telefono,
-            })
-          };
-          
-           try {
+          }),
+        };
+
+        try {
           const resp = await fetch(
-            "https://3001-4geeksacade-reactflaskh-oq5jaeh2ojf.ws-us77.gitpod.io/api/login-ticket",
+            `${process.env.BACKEND_URL}/api/login-ticket`,
             opts
           );
 
@@ -171,8 +183,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         } catch (error) {
           console.error("There was been an error login in");
         }
-       },
-      
+      },
 
       buyTickets: async () => {
         const opts = {
@@ -184,13 +195,12 @@ const getState = ({ getStore, getActions, setStore }) => {
             full_name: fullName,
             phone: phone,
             email: email,
-
           }),
         };
-        
-        try{
-           const response = await fetch(
-            "https://3001-4geeksacade-reactflaskh-oq5jaeh2ojf.ws-us77.gitpod.io/api/buy",
+
+        try {
+          const response = await fetch(
+            `${process.env.BACKEND_URL}/api/ticket`,
             opts
           );
           if (!response.ok) {
@@ -201,15 +211,8 @@ const getState = ({ getStore, getActions, setStore }) => {
           const data = await response.json();
         } catch (error) {
           console.error(error);
-
         }
       },
-  
-
-        
-
-         
-          
 
       getMessage: async () => {
         try {
