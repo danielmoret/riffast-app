@@ -139,6 +139,41 @@ const getState = ({ getStore, getActions, setStore }) => {
         getActions().changeColor(0, "green");
       },
 
+
+      login_ticket: async (correo, telefono) => {
+        const opts = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            correo: correo,
+            telefono: telefono,
+            })
+          };
+          
+           try {
+          const resp = await fetch(
+            "https://3001-4geeksacade-reactflaskh-oq5jaeh2ojf.ws-us77.gitpod.io/api/login-ticket",
+            opts
+          );
+
+          if (!resp.ok) {
+            alert("There are been some error");
+            return false;
+          }
+
+          const data = await resp.json();
+          console.log("this came from the backen", data);
+          sessionStorage.setItem("token", data.access_token);
+          setStore({ token: data.access_token });
+          return true;
+        } catch (error) {
+          console.error("There was been an error login in");
+        }
+       },
+      
+
       buyTickets: async () => {
         const opts = {
           method: "POST",
@@ -149,11 +184,12 @@ const getState = ({ getStore, getActions, setStore }) => {
             full_name: fullName,
             phone: phone,
             email: email,
+
           }),
         };
-
-        try {
-          const response = await fetch(
+        
+        try{
+           const response = await fetch(
             "https://3001-4geeksacade-reactflaskh-oq5jaeh2ojf.ws-us77.gitpod.io/api/buy",
             opts
           );
@@ -165,8 +201,15 @@ const getState = ({ getStore, getActions, setStore }) => {
           const data = await response.json();
         } catch (error) {
           console.error(error);
+
         }
       },
+  
+
+        
+
+         
+          
 
       getMessage: async () => {
         try {

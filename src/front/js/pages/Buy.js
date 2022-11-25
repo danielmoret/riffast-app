@@ -16,6 +16,8 @@ export const Buy = () => {
     actions.buyTickets(fullName,phone,email)
   }
 
+  const [correo, setCorreo] = useState("");
+  const consultar = (correo) => {};
   return (
     <div className="min-vh-100 mb-5">
       <Boleto />
@@ -96,8 +98,15 @@ export const Buy = () => {
                 <label className="form-label">
                   Ingresa el número o email registrado en la rifa
                 </label>
-                <input className="form-control mb-3" aria-label="Default" />
-                <button className="my-button rounded">Consultar</button>
+                <input
+                  className="form-control mb-3"
+                  aria-label="Default"
+                  value={correo}
+                  onChange={(event) => setCorreo(event.target.value)}
+                />
+                <button className="my-button rounded" onClick={consultar}>
+                  Consultar
+                </button>
               </div>
             </div>
 
