@@ -106,6 +106,35 @@ const getState = ({ getStore, getActions, setStore }) => {
         getActions().changeColor(0, "green");
       },
 
+      buyTickets: async () => {
+        const opts = {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify({
+            full_name: fullName,
+            phone: phone,
+            email: email,
+          }),
+        };
+
+        try {
+          const response = await fetch(
+            "https://3001-4geeksacade-reactflaskh-oq5jaeh2ojf.ws-us77.gitpod.io/api/buy",
+            opts
+          );
+          if (!response.ok) {
+            let msg = await response.json();
+            alert(msg.msg);
+            return false;
+          }
+          const data = await response.json();
+        } catch (error) {
+          console.error(error);
+        }
+      },
+
       getMessage: async () => {
         try {
           // fetching data from the backend
