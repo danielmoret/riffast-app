@@ -50,7 +50,7 @@ export const Login = () => {
           <input
             className="btn btn-primary w-100 btn-signup"
             type="submit"
-            value="Ingresa ya!"
+            value="¡Ingresa ya!"
           />
           <div className="text-center mt-2">
             ¿No tienes cuenta?&nbsp;

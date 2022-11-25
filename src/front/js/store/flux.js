@@ -46,7 +46,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         try {
           const resp = await fetch(
-            `https://3001-luisjaas-riffastapp-7yhm8zeid59.ws-us77.gitpod.io/api/user-talonario`,
+            `${process.env.BACKEND_URL}/api/user-talonario`,
             opts
           );
 
@@ -78,7 +78,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         try {
           const resp = await fetch(
-            "https://3001-luisjaas-riffastapp-7yhm8zeid59.ws-us77.gitpod.io/api/login-talonario",
+            `${process.env.BACKEND_URL}/api/login-talonario`,
             opts
           );
 
@@ -103,13 +103,22 @@ const getState = ({ getStore, getActions, setStore }) => {
         setStore({ token: null });
       },
 
-      crear_talonario: async (nombre, premio, precio, img, descripcion, fecha, plataforma, metodoPago) => {
-        const store = getStore()
+      crear_talonario: async (
+        nombre,
+        premio,
+        precio,
+        img,
+        descripcion,
+        fecha,
+        plataforma,
+        metodoPago
+      ) => {
+        const store = getStore();
         const opts = {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${store.token}` 
+            Authorization: `Bearer ${store.token}`,
           },
           body: JSON.stringify({
             nombre: nombre,
@@ -119,19 +128,23 @@ const getState = ({ getStore, getActions, setStore }) => {
             descripcion: descripcion,
             fecha_sorteo: fecha,
             plataforma_sorteo: plataforma,
-            metodo_de_pago: metodoPago
+            metodo_de_pago: metodoPago,
           }),
         };
         try {
-          const resp= await fetch("https://3001-luisjaas-riffastapp-7yhm8zeid59.ws-us77.gitpod.io/api/talonario", opts)
-          if (!resp.ok)
-            { alert("no se pudo realizar esta accion") }
-            const data = await resp.json()
-            console.log(data)
-            store.talonarios.push(data)
-            setStore({talonarios:store.talonarios})
+          const resp = await fetch(
+            `${process.env.BACKEND_URL}/api/talonario`,
+            opts
+          );
+          if (!resp.ok) {
+            alert("no se pudo realizar esta accion");
+          }
+          const data = await resp.json();
+          console.log(data);
+          store.talonarios.push(data);
+          setStore({ talonarios: store.talonarios });
         } catch (error) {
-          console.log(error)
+          console.log(error);
         }
       },
 
@@ -140,6 +153,68 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       exampleFunction: () => {
         getActions().changeColor(0, "green");
+      },
+
+      login_ticket: async (correo, telefono) => {
+        const opts = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            correo: correo,
+            telefono: telefono,
+          }),
+        };
+
+        try {
+          const resp = await fetch(
+            `${process.env.BACKEND_URL}/api/login-ticket`,
+            opts
+          );
+
+          if (!resp.ok) {
+            alert("There are been some error");
+            return false;
+          }
+
+          const data = await resp.json();
+          console.log("this came from the backen", data);
+          sessionStorage.setItem("token", data.access_token);
+          setStore({ token: data.access_token });
+          return true;
+        } catch (error) {
+          console.error("There was been an error login in");
+        }
+      },
+
+      buyTickets: async () => {
+        const opts = {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify({
+            full_name: fullName,
+            phone: phone,
+            email: email,
+          }),
+        };
+
+        try {
+          const response = await fetch(
+            `${process.env.BACKEND_URL}/api/ticket`,
+            opts
+          );
+          if (!response.ok) {
+            let msg = await response.json();
+            alert(msg.msg);
+            return false;
+          }
+          const data = await response.json();
+        } catch (error) {
+          console.error(error);
+        }
       },
 
       getMessage: async () => {
