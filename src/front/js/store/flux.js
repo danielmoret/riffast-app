@@ -145,18 +145,6 @@ const getState = ({ getStore, getActions, setStore }) => {
         } catch (error) {
           console.log(error);
         }
-        numberBuilder: (num) => {
-          let numbers = [];
-      
-          for (let i = 0; i < num; i++) {
-            numbers.push({
-              value: i.toString().padStart(2, "0"),
-              status: "Disponible",
-            });
-          }
-      
-          return numbers;
-        }
       },
 
       exampleFunction: () => {
