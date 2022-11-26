@@ -109,8 +109,10 @@ def signup_talonario():
 @jwt_required()
 def get_talonarios():
 
+    user_id = get_jwt_identity()
+
     if request.method == "GET" :
-        talonarios = Talonario.query.all()
+        talonarios = Talonario.query.filter_by(user_id = user_id)
         talonarios_dictionaries = []
 
         for talonario in talonarios :
@@ -119,8 +121,6 @@ def get_talonarios():
         return jsonify(talonarios_dictionaries), 200
     
     new_talonario_data = request.json
-
-    user_id = get_jwt_identity()
 
     try: 
         new_talonario = Talonario.create(**new_talonario_data, user_id = user_id)

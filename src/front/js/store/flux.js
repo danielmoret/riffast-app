@@ -142,20 +142,30 @@ const getState = ({ getStore, getActions, setStore }) => {
           }
           const data = await resp.json();
           console.log(data);
+
         } catch (error) {
           console.log(error);
         }
-        numberBuilder: (num) => {
-          let numbers = [];
-      
-          for (let i = 0; i < num; i++) {
-            numbers.push({
-              value: i.toString().padStart(2, "0"),
-              status: "Disponible",
-            });
-          }
-      
-          return numbers;
+      obtenerTalonario: async () => {
+        const store = getStore();
+        const opts = {
+          headers: {
+            Authorization: `Bearer ${store.token}`,
+          },
+        };
+        try {
+          const resp = await fetch(
+            `${process.env.BACKEND_URL}/api/talonario`,
+            opts
+          );
+          if(!resp.ok) 
+            {alert('no se pudo realizar')
+              return false
+        }
+          let data = await resp.json()
+          setStore({talonarios:data})
+        } catch (error) {
+          console.log()
         }
       },
 
