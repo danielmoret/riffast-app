@@ -114,6 +114,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         metodoPago
       ) => {
         const store = getStore();
+        const actions = getActions();
         const opts = {
           method: "POST",
           headers: {
@@ -139,11 +140,12 @@ const getState = ({ getStore, getActions, setStore }) => {
           if (!resp.ok) {
             alert("no se pudo realizar esta accion");
           }
+          const data = await resp.json();
+          console.log(data);
+
         } catch (error) {
           console.log(error);
         }
-      },
-
       obtenerTalonario: async () => {
         const store = getStore();
         const opts = {
