@@ -139,16 +139,32 @@ const getState = ({ getStore, getActions, setStore }) => {
           if (!resp.ok) {
             alert("no se pudo realizar esta accion");
           }
-          const data = await resp.json();
-          console.log(data);
-          store.talonarios.push(data);
-          setStore({ talonarios: store.talonarios });
         } catch (error) {
           console.log(error);
         }
       },
 
-      obtenerTalonario: () => {
+      obtenerTalonario: async () => {
+        const store = getStore();
+        const opts = {
+          headers: {
+            Authorization: `Bearer ${store.token}`,
+          },
+        };
+        try {
+          const resp = await fetch(
+            `${process.env.BACKEND_URL}/api/talonario`,
+            opts
+          );
+          if(!resp.ok) 
+            {alert('no se pudo realizar')
+              return false
+        }
+          let data = await resp.json()
+          setStore({talonarios:data})
+        } catch (error) {
+          console.log()
+        }
       },
 
       exampleFunction: () => {
