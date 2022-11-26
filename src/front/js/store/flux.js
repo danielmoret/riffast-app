@@ -147,6 +147,29 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
+      obtenerTalonario: async () => {
+        const store = getStore();
+        const opts = {
+          headers: {
+            Authorization: `Bearer ${store.token}`,
+          },
+        };
+        try {
+          const resp = await fetch(
+            `${process.env.BACKEND_URL}/api/talonario`,
+            opts
+          );
+          if (!resp.ok) {
+            alert("no se pudo realizar");
+            return false;
+          }
+          let data = await resp.json();
+          setStore({ talonarios: data });
+        } catch (error) {
+          console.log();
+        }
+      },
+
       exampleFunction: () => {
         getActions().changeColor(0, "green");
       },
