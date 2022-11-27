@@ -27,7 +27,7 @@ export const Signup = () => {
             className="form-control"
             type="text"
             value={fullname}
-            onChange={(event) => setFullname(event.target.value.trim())}
+            onChange={(event) => setFullname(event.target.value)}
           />
         </div>
 

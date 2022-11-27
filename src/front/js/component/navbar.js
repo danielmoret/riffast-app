@@ -12,7 +12,7 @@ export const Navbar = () => {
         <Link to="/">
           <img src={rifast} className="logo" />
         </Link>
-        {!store.token ? (
+        {!store.tokenUserTalonario ? (
           <div className="ml-auto d-flex gap-2">
             <Link to="/login">
               <button className="btn login">Login</button>

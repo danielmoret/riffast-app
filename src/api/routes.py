@@ -2,6 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 import os
+from sqlalchemy import or_
 from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, User, Ticket, Talonario, User_ticket
 from api.utils import generate_sitemap, APIException
@@ -30,13 +31,12 @@ def login_ticket():
     email = request.json.get("email", None)
     phone = request.json.get("phone", None)
     
-    user_phone = User_ticket.query.filter_by( phone = phone).first()
-    if user_phone is None:
-        user_email = User_ticket.query.filter_by( phone = phone).first()
-        if user_email is None:
+    user_ticket = User_ticket.query.filter(or_(User_ticket.phone == phone,  User_ticket.email ==email) ).first()
+    if user_ticket is None:
             return jsonify({"msg": "El telefono o email no son correctos"}), 401
     
-    return jsonify({"msg": "Login ticket satisfactorio"}), 401
+    access_token = create_access_token(identity=user_ticket.id)
+    return jsonify({"access_token" : access_token, "user_ticket_id":user_ticket.id, "nombre":user_ticket.full_name, "user_email":user_ticket.phone}),200
 
 #Signup user_ticket
 @api.route('/user-ticket', methods=['GET','POST'])
@@ -56,7 +56,9 @@ def get_users():
             raise Exception("No ingresaste el nombre completo",400)
         if "phone" not in new_user_data or new_user_data["phone"] == "": 
             raise Exception("No ingresaste el phone",400)
+
         new_user = User_ticket.create(**new_user_data)
+
         return jsonify(new_user.serialize()),200
     except Exception as error:
         return jsonify(error.args[0]),error.args[1] if len(error.args) > 1 else 500
@@ -140,9 +142,13 @@ def get_talonario(talonario_id):
 
 #tickets
 @api.route('/ticket', methods=['POST', 'GET'])
+@jwt_required()
 def get_tickets():
+
+    user_ticket_id = get_jwt_identity()
+
     if request.method == "GET":
-        tickets = Ticket.query.all()
+        tickets = Ticket.query.filter_by(user_ticket_id = user_ticket_id)
         tickets_dictionaries = []
         for ticket in tickets :
             tickets_dictionaries.append(ticket.serialize())
@@ -151,7 +157,7 @@ def get_tickets():
     
     new_ticket_data = request.json
     try:
-        new_ticket = Ticket.create(**new_ticket_data)
+        new_ticket = Ticket.create(**new_ticket_data, user_ticket_id = user_ticket_id)
         return jsonify(new_ticket.serialize()), 201
     
     except Exception as error:

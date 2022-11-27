@@ -1,23 +1,37 @@
 import React, { useState, useContext } from "react";
+import { useParams } from "react-router-dom";
 import { Boleto } from "../component/Boleto.js";
 import { Buttons } from "../component/Buttons.js";
 import { VistaTickets } from "../component/VistaTickets.js";
-import { Context } from  "../store/appContext";
+import { Context } from "../store/appContext";
 
 export const Buy = () => {
+  const params = useParams();
   const [buySelect, setBuySelect] = useState("");
-  const {store,actions} = useContext(Context);
+  const { store, actions } = useContext(Context);
   const [fullName, setFullName] = useState("");
+  const [numeroTicket, setNumeroTicket] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
-
-  const sendData = (e) => {
-    e.preventDefault()
-    actions.buyTickets(fullName,phone,email)
-  }
-
   const [correo, setCorreo] = useState("");
-  const consultar = (correo) => {};
+
+  const sendData = async (e) => {
+    e.preventDefault();
+    if (fullName != "" && phone != "" && numeroTicket != "") {
+      let buy = await actions.buyTickets(fullName, phone, email);
+      if (buy != false) {
+        let login = await actions.login_ticket(email, phone);
+        if (login != false) {
+          console.log(params.talonario_id);
+          actions.crearTicket(numeroTicket, params.talonario_id);
+        }
+      }
+    }
+  };
+
+  const consultar = () => {
+    actions.login_ticket(correo, correo);
+  };
   return (
     <div className="min-vh-100 mb-5">
       <Boleto />
@@ -32,8 +46,10 @@ export const Buy = () => {
               <select
                 className="form-select mb-3 dropdown-ticket"
                 aria-label="Default select example"
+                value={numeroTicket}
+                onChange={(event) => setNumeroTicket(event.target.value)}
               >
-                <option selected>Selecciona tu número</option>
+                <option>Selecciona tu número</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -44,8 +60,8 @@ export const Buy = () => {
               <div className="form-group mb-2">
                 <label className="form-label fw-bold">Nombre Completo</label>
                 <input
-                  value ={fullName}
-                  onChange ={(e)=> setFullName(e.target.value)}
+                  value={fullName}
+                  onChange={(e) => setFullName(e.target.value)}
                   className="form-control"
                   type="text"
                   placeholder="Nombre y apellido"
@@ -55,8 +71,8 @@ export const Buy = () => {
               <div className="form-group mb-2 fw-bold">
                 <label className="form-label">Teléfono</label>
                 <input
-                  value ={phone}
-                  onChange ={(e)=> setPhone(e.target.value)}
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
                   className="form-control"
                   type="text"
                   placeholder="ej. 04241111111"
@@ -67,9 +83,10 @@ export const Buy = () => {
                 <label className="form-label">Email (opcional)</label>
                 <input
                   value={email}
-                  onChange={(e)=> setEmail(e.target.value)} 
-                  className="form-control" 
-                  type="email" />
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="form-control"
+                  type="email"
+                />
               </div>
 
               <div className="mb-3 form-check">
@@ -104,7 +121,11 @@ export const Buy = () => {
                   value={correo}
                   onChange={(event) => setCorreo(event.target.value)}
                 />
-                <button className="my-button rounded" onClick={consultar}>
+                <button
+                  type="submit"
+                  className="my-button rounded"
+                  onClick={consultar}
+                >
                   Consultar
                 </button>
               </div>

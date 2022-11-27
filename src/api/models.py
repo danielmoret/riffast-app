@@ -7,8 +7,8 @@ db = SQLAlchemy()
 class Ticket(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     numero = db.Column(db.Integer, nullable=False)
+    status = db.Column(db.String, nullable=False )
     talonario_id = db.Column(db.Integer, db.ForeignKey('talonario.id'))
-    status = db.Column(db.String, default="Disponible", nullable=False )
     user_ticket_id = db.Column(db.Integer, db.ForeignKey('user_ticket.id'))
 
     def __init__(self, **kwargs):

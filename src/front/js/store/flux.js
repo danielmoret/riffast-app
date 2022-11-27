@@ -1,9 +1,11 @@
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
-      token: null,
+      tokenUserTalonario: null,
+      tokenUserTicket: null,
       message: null,
       talonarios: [],
+      tickets: [],
       demo: [
         {
           title: "FIRST",
@@ -21,12 +23,26 @@ const getState = ({ getStore, getActions, setStore }) => {
       // Use getActions to call a function within a fuction
 
       syncToken: () => {
-        const token = sessionStorage.getItem("token");
+        const tokenUserTalonario = sessionStorage.getItem("tokenUserTalonario");
+        const tokenUserTicket = sessionStorage.getItem("tokenUserTicket");
         console.log(
           "Aplication just loaded, synching the session storage token"
         );
-        if (token && token != "" && token != undefined)
-          setStore({ token: token });
+        if (
+          tokenUserTalonario &&
+          tokenUserTalonario != "" &&
+          tokenUserTalonario != undefined
+        ) {
+          setStore({ tokenUserTalonario: tokenUserTalonario });
+        }
+
+        if (
+          tokenUserTicket &&
+          tokenUserTicket != "" &&
+          tokenUserTicket != undefined
+        ) {
+          setStore({ tokenUserTicket: tokenUserTicket });
+        }
       },
 
       signup_talonario: async (fullName, email, phone, password) => {
@@ -89,8 +105,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 
           const data = await resp.json();
           console.log("this came from the backen", data);
-          sessionStorage.setItem("token", data.access_token);
-          setStore({ token: data.access_token });
+          sessionStorage.setItem("tokenUserTalonario", data.access_token);
+          setStore({ tokenUserTalonario: data.access_token });
           return true;
         } catch (error) {
           console.error("There was been an error login in");
@@ -98,9 +114,9 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       logout_talonario: () => {
-        sessionStorage.removeItem("token");
+        sessionStorage.removeItem("tokenUserTalonario");
         console.log("Login out");
-        setStore({ token: null });
+        setStore({ tokenUserTalonario: null });
       },
 
       crear_talonario: async (
@@ -119,7 +135,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${store.token}`,
+            Authorization: `Bearer ${store.tokenUserTalonario}`,
           },
           body: JSON.stringify({
             nombre: nombre,
@@ -151,7 +167,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         const store = getStore();
         const opts = {
           headers: {
-            Authorization: `Bearer ${store.token}`,
+            Authorization: `Bearer ${store.tokenUserTalonario}`,
           },
         };
         try {
@@ -174,15 +190,15 @@ const getState = ({ getStore, getActions, setStore }) => {
         getActions().changeColor(0, "green");
       },
 
-      login_ticket: async (correo, telefono) => {
+      login_ticket: async (correo) => {
         const opts = {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            correo: correo,
-            telefono: telefono,
+            email: correo,
+            phone: correo,
           }),
         };
 
@@ -199,15 +215,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 
           const data = await resp.json();
           console.log("this came from the backen", data);
-          sessionStorage.setItem("token", data.access_token);
-          setStore({ token: data.access_token });
+          sessionStorage.setItem("tokenUserTicket", data.access_token);
+          setStore({ tokenUserTicket: data.access_token });
           return true;
         } catch (error) {
           console.error("There was been an error login in");
         }
       },
 
-      buyTickets: async () => {
+      buyTickets: async (fullName, phone, email) => {
         const opts = {
           method: "POST",
           headers: {
@@ -222,7 +238,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         try {
           const response = await fetch(
-            `${process.env.BACKEND_URL}/api/ticket`,
+            `${process.env.BACKEND_URL}/api/user-ticket`,
             opts
           );
           if (!response.ok) {
@@ -231,6 +247,36 @@ const getState = ({ getStore, getActions, setStore }) => {
             return false;
           }
           const data = await response.json();
+          console.log(data);
+        } catch (error) {
+          console.error(error);
+        }
+      },
+
+      crearTicket: async (numeroTicket, talonario_id) => {
+        const store = getStore();
+        const opts = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${store.tokenUserTicket}`,
+          },
+          body: JSON.stringify({
+            numero: numeroTicket,
+            talonario_id: talonario_id,
+            status: "reservado",
+          }),
+        };
+        try {
+          const resp = await fetch(
+            `${process.env.BACKEND_URL}/api/ticket`,
+            opts
+          );
+          if (!resp.ok) {
+            alert("no se pudo crear ticket");
+          }
+          const data = await resp.json();
+          console.log(data);
         } catch (error) {
           console.error(error);
         }
