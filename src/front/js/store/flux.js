@@ -88,6 +88,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           },
           body: JSON.stringify({
             email: email,
+            phone: email,
             password: password,
           }),
         };
