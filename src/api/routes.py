@@ -69,8 +69,9 @@ def login_talonario():
     
     email = request.json.get("email", None)
     password = request.json.get("password", None)
+    phone = request.json.get("phone", None)
 
-    user = User.query.filter_by(email=email, password=password).first()
+    user = User.query.filter(or_(User.phone == phone,  User.email ==email), User.password == password ).first()
     if user is None : 
         return jsonify({"msg":"El usuario o la contraseña son incorrectos"}), 401
     
