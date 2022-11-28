@@ -1,24 +1,45 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
+import { useNavigate } from "react-router-dom";
 import "../../styles/home.css";
 
 export const RaffleRegistration = () => {
   const { store, actions } = useContext(Context);
-  const [ nombre, setNombre ] = useState('')
-  const [ premio, setPremio ] = useState('')
-  const [ precio, setPrecio ] = useState('')
-  const [ img, setImg ] = useState('')
-  const [ descripcion, setDescripcion ] = useState('')
-  const [ fecha, setFecha ] = useState('')
-  const [ plataforma, setPlataforma ] = useState('')
-  const [ metodoPago, setMetodoPago ] = useState('')
+  const [nombre, setNombre] = useState("");
+  const [premio, setPremio] = useState("");
+  const [precio, setPrecio] = useState("");
+  const [img, setImg] = useState("");
+  const [descripcion, setDescripcion] = useState("");
+  const [fecha, setFecha] = useState("");
+  const [plataforma, setPlataforma] = useState("");
+  const [metodoPago, setMetodoPago] = useState("");
+  const navigate = useNavigate();
 
   const sendData = (event) => {
     event.preventDefault();
-    console.log('nombre', nombre)
-    actions.crear_talonario(nombre, premio, precio, img, descripcion, fecha, plataforma, metodoPago)
+    console.log("nombre", nombre);
+    actions.crear_talonario(
+      nombre,
+      premio,
+      precio,
+      img,
+      descripcion,
+      fecha,
+      plataforma,
+      metodoPago
+    );
+    if (
+      nombre != "" &&
+      premio != "" &&
+      precio != "" &&
+      img != "" &&
+      descripcion != "" &&
+      fecha != "" &&
+      plataforma != "" &&
+      metodoPago != ""
+    )
+      navigate("/raffler");
   };
-
 
   return (
     <>
@@ -26,8 +47,7 @@ export const RaffleRegistration = () => {
         <h1 className="tituloregistro text-center">Registro de rifa</h1>
 
         <form onSubmit={sendData}>
-          
-        <div className="nombre mb-3">
+          <div className="nombre mb-3">
             <label htmlFor="exampleInputEmail1" className="form-label">
               <strong>Nombre de la rifa:</strong>
             </label>
@@ -38,11 +58,11 @@ export const RaffleRegistration = () => {
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
                 value={nombre}
-                  onChange={(event) => setNombre(event.target.value)}
+                onChange={(event) => setNombre(event.target.value)}
               ></input>
             </div>
           </div>
-          
+
           <div className="premio mb-3">
             <label htmlFor="exampleInputEmail1" className="form-label">
               <strong>Premio:</strong>
@@ -54,7 +74,7 @@ export const RaffleRegistration = () => {
               aria-describedby="premio"
               placeholder="Escriba cual es el premio a entregar"
               value={premio}
-                onChange={(event) => setPremio(event.target.value)}
+              onChange={(event) => setPremio(event.target.value)}
             ></input>
           </div>
 
@@ -72,7 +92,7 @@ export const RaffleRegistration = () => {
                 aria-describedby="precio de la rifa"
                 placeholder="Escriba el precio de la rifa en divisas ($)"
                 value={precio}
-                  onChange={(event) => setPrecio(event.target.value)}
+                onChange={(event) => setPrecio(event.target.value)}
               ></input>
             </div>
           </div>
@@ -87,7 +107,7 @@ export const RaffleRegistration = () => {
               id="formFileMultiple"
               multiple
               value={img}
-                onChange={(event) => setImg(event.target.value)}
+              onChange={(event) => setImg(event.target.value)}
             ></input>
           </div>
 
@@ -101,7 +121,7 @@ export const RaffleRegistration = () => {
               rows="3"
               placeholder="Escriba una breve descripción de la rifa a realizar."
               value={descripcion}
-               onChange={(event) => setDescripcion(event.target.value)}
+              onChange={(event) => setDescripcion(event.target.value)}
             ></textarea>
           </div>
 
@@ -110,7 +130,7 @@ export const RaffleRegistration = () => {
               <strong>Fecha del sorteo:</strong>
             </label>
             <div className="input-group">
-            <input
+              <input
                 type="date"
                 className="form-control"
                 placeholder="Dia"
@@ -124,11 +144,12 @@ export const RaffleRegistration = () => {
             <label htmlFor="exampleFormControlTextarea1" className="form-label">
               <strong>Plataforma/Medio donde se realizara el sorteo:</strong>
             </label>
-            <select 
-              className="form-select" 
+            <select
+              className="form-select"
               aria-label="Default select example"
               value={plataforma}
-                onChange={(event) => setPlataforma(event.target.value)}>
+              onChange={(event) => setPlataforma(event.target.value)}
+            >
               <option selected>Seleccione una plataforma/medio</option>
               <option value="instagram">Instagram</option>
               <option value="twitter">Twitter</option>
@@ -143,11 +164,12 @@ export const RaffleRegistration = () => {
             <label htmlFor="exampleFormControlTextarea1" className="form-label">
               <strong>Método de pago:</strong>
             </label>
-            <select 
-              className="form-select" 
+            <select
+              className="form-select"
               aria-label="Default select example"
               value={metodoPago}
-                onChange={(event) => setMetodoPago(event.target.value)}>
+              onChange={(event) => setMetodoPago(event.target.value)}
+            >
               <option selected>Seleccione un método de pago</option>
               <option value="$">Dolares en efectivo</option>
               <option value="binance">Binance</option>
