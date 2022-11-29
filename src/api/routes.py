@@ -178,10 +178,8 @@ def get_ticket(ticket_id):
         return jsonify({'msg':'ticket no existe'})
 
 @api.route('/tickets/<int:talonario_id>', methods=['GET'])
-@jwt_required()
 def get_tickets_talonario(talonario_id):
 
-    user_id = get_jwt_identity()
 
     tickets = Ticket.query.filter_by(talonario_id = talonario_id)
     try:

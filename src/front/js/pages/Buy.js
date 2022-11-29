@@ -20,6 +20,16 @@ export const Buy = () => {
   }, []);
 
   useEffect(() => {
+    if (store.talonarioSelect.constructor === Object) {
+      actions.getTickets(store.talonarioSelect.id);
+    }
+  }, [store.talonarioSelect]);
+
+  useEffect(() => {
+    actions.numberFilter(store.ticketsReservados);
+  }, [store.ticketsReservados]);
+
+  useEffect(() => {
     actions.numberFilter(store.ticketsReservados);
   }, [store.ticketsReservados]);
 
@@ -168,7 +178,6 @@ export const Buy = () => {
                 onChange={(event) => setNumeroTicket(event.target.value)}
               >
                 {/* hacer un fecht a la base de base de datos para que salgan los tickets disponibles en este caso 100 tickets*/}
-                <option>Selecciona tu número</option>
                 <option>Selecciona tu número</option>
                 {store.tickets.map((ticket) => {
                   if (ticket.status == "disponible") {
