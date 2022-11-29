@@ -18,7 +18,9 @@ export const Buttons = (props) => {
       <div
         className="modal fade"
         id="exampleModal"
+
         tabIndex={-1}
+
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
@@ -28,6 +30,7 @@ export const Buttons = (props) => {
               <h1 className="modal-title fs-5" id="exampleModalLabel">
                 Modal title
               </h1>
+
               <button
                 type="button"
                 className="btn-close"
@@ -36,12 +39,16 @@ export const Buttons = (props) => {
               ></button>
             </div>
             <div className="modal-body">
-              ¿Has concursado en riffast anteriormente?
+              ¿Has concursado en<i>Riffast</i>anteriormente?
             </div>
             <div className="modal-footer">
               <button
                 type="button"
-                className="btn btn-secondary"
+
+                className="yes btn btn-secondary"
+
+            
+
                 data-bs-dismiss="modal"
                 onClick={() => props.setBuySelect("newbuy")}
               >
@@ -49,11 +56,14 @@ export const Buttons = (props) => {
               </button>
               <button
                 type="button"
-                className="btn btn-primary"
+
+                className="no btn btn-primary"
                 data-bs-dismiss="modal"
                 onClick={() => props.setBuySelect("previousbuy")}
               >
-                si
+                Si
+
+
               </button>
             </div>
           </div>

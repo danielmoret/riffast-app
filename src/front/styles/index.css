@@ -369,3 +369,28 @@ i {
   color: var(--color-amarillo);
   font-weight: bold;
 }
+
+.yes {
+  background-color: var(--color-azul);
+  color: var(--color-amarillo);
+  font-weight: bold;
+}
+.no {
+  background-color: var(--color-lima);
+  color: var(--color-azul);
+  font-weight: bold;
+}
+
+.modal {
+  color: #293250;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 15px;
+  border-radius: 16px;
+}
+
+.modal-header,
+.modal-footer {
+  background-color: #fed163;
+}
