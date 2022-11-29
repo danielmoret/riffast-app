@@ -349,6 +349,7 @@ footer {
 
 .locationf {
   font-size: 20px;
+  margin: 20px 0;
 }
 
 h5 {
@@ -360,8 +361,13 @@ footer {
   color: white;
 }
 
-i {
-  margin: 5px;
+.i-footer {
+  margin: 0 5px;
+}
+
+.flask {
+  margin: 0 0 0 5px;
+  height: 70px;
 }
 
 .my-button {
