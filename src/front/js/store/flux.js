@@ -4,7 +4,10 @@ const getState = ({ getStore, getActions, setStore }) => {
       tokenUserTalonario: null,
       tokenUserTicket: null,
       message: null,
+      infoTicket: [],
+      talonarioSelect: [],
       talonarios: [],
+      ticketsReservados: [],
       tickets: [],
       demo: [
         {
@@ -187,6 +190,20 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
+      selectTalonario: async (talonarioId) => {
+        const store = getStore();
+        const resp = await fetch(
+          `${process.env.BACKEND_URL}/api/talonario/${talonarioId}`
+        );
+        try {
+          if (!resp.ok) {
+            alert("No se pudo encontrar un talonario especifico");
+          }
+          let data = await resp.json();
+          setStore({ talonarioSelect: data });
+        } catch (error) {}
+      },
+
       exampleFunction: () => {
         getActions().changeColor(0, "green");
       },
@@ -281,6 +298,85 @@ const getState = ({ getStore, getActions, setStore }) => {
         } catch (error) {
           console.error(error);
         }
+      },
+
+      getTickets: async () => {
+        const store = getStore();
+        const opts = {
+          headers: {
+            Authorization: `Bearer ${store.tokenUserTalonario}`,
+          },
+        };
+        const resp = await fetch(
+          `${process.env.BACKEND_URL}/api/tickets`,
+          opts
+        );
+        try {
+          if (!resp.ok) {
+            alert("No se obtuvieros tickets");
+          }
+          let data = await resp.json();
+          setStore({ ticketsReservados: data });
+        } catch (error) {
+          console.error(error);
+        }
+      },
+
+      infoTicket: async (numero, talonarioID) => {
+        const resp = await fetch(
+          `${process.env.BACKEND_URL}/api/info-ticket/${numero}/${talonarioID}`
+        );
+        try {
+          if (!resp.ok) {
+            alert("No se obtuvo info de ticket");
+          }
+          let data = await resp.json();
+          console.log(data);
+          setStore({ infoTicket: data });
+        } catch (error) {
+          console.error(error);
+        }
+      },
+
+      numberFilter: (numeros) => {
+        const store = getStore();
+        let num = [];
+        const numerosReservados = numeros.map((numero) => {
+          if (numero.status == "reservado") {
+            return numero.numero;
+          }
+        });
+
+        for (let i = 0; i < 100; i++) {
+          if (numerosReservados.includes(i)) {
+            num.push({
+              value: i.toString().padStart(2, "0"),
+              numero: i,
+              status: "reservado",
+            });
+          } else {
+            num.push({
+              value: i.toString().padStart(2, "0"),
+              numero: i,
+              status: "disponible",
+            });
+          }
+        }
+
+        setStore({ tickets: num });
+      },
+
+      numberBuilder: (num) => {
+        let numbers = [];
+
+        for (let i = 0; i < num; i++) {
+          numbers.push({
+            value: i.toString().padStart(2, "0"),
+            status: "disponible",
+          });
+        }
+
+        return numbers;
       },
 
       getMessage: async () => {
