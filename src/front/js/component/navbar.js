@@ -30,7 +30,7 @@ export const Navbar = () => {
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                Tus Talonarios
+                Talonarios
               </button>
               <ul className="dropdown-menu">
                 {store.talonarios.map((talonario) => (

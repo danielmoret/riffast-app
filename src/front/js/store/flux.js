@@ -300,7 +300,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
-      getTickets: async () => {
+      getTickets: async (talonarioID) => {
         const store = getStore();
         const opts = {
           headers: {
@@ -308,7 +308,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           },
         };
         const resp = await fetch(
-          `${process.env.BACKEND_URL}/api/tickets`,
+          `${process.env.BACKEND_URL}/api/tickets/${talonarioID}`,
           opts
         );
         try {

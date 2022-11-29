@@ -169,15 +169,14 @@ export const Buy = () => {
               >
                 {/* hacer un fecht a la base de base de datos para que salgan los tickets disponibles en este caso 100 tickets*/}
                 <option>Selecciona tu número</option>
-                <option value="0">0</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
+                <option>Selecciona tu número</option>
+                {store.tickets.map((ticket) => {
+                  if (ticket.status == "disponible") {
+                    return (
+                      <option value={ticket.numero}>{ticket.numero}</option>
+                    );
+                  }
+                })}
               </select>
 
               <label className="form-label">

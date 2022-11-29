@@ -177,14 +177,13 @@ def get_ticket(ticket_id):
     except Exception as error:
         return jsonify({'msg':'ticket no existe'})
 
-@api.route('/tickets', methods=['GET'])
+@api.route('/tickets/<int:talonario_id>', methods=['GET'])
 @jwt_required()
-def get_tickets_talonario():
+def get_tickets_talonario(talonario_id):
 
     user_id = get_jwt_identity()
 
-    talonarios = Talonario.query.filter_by(user_id = user_id).first()
-    tickets = Ticket.query.filter_by(talonario_id = talonarios.id)
+    tickets = Ticket.query.filter_by(talonario_id = talonario_id)
     try:
         ticket_dictio = []
         for ticket in tickets:

@@ -17,7 +17,6 @@ export const RaffleRegistration = () => {
 
   const sendData = (event) => {
     event.preventDefault();
-    console.log("nombre", nombre);
     actions.crear_talonario(
       nombre,
       premio,

@@ -20,13 +20,17 @@ export const Raffler = () => {
     ) {
       actions.obtenerTalonario();
       actions.selectTalonario(1);
-      actions.getTickets();
+      actions.getTickets(store.talonarioSelect.id);
     }
   }, [store.tokenUserTalonario]);
 
   useEffect(() => {
     actions.numberFilter(store.ticketsReservados);
   }, [store.ticketsReservados]);
+
+  useEffect(() => {
+    actions.getTickets(store.talonarioSelect.id);
+  }, [store.talonarioSelect]);
 
   const updateStatus = (ticketNumber, liberar = false) => {
     if (ticketNumber.status == "disponible" && liberar == false) {
