@@ -19,17 +19,23 @@ export const Raffler = () => {
       store.tokenUserTalonario !== undefined
     ) {
       actions.obtenerTalonario();
-      actions.selectTalonario(1);
-      actions.getTickets(store.talonarioSelect.id);
     }
   }, [store.tokenUserTalonario]);
+
+  useEffect(() => {
+    if (store.talonarios.length > 0) {
+      actions.selectTalonario(store.talonarios[0].id);
+    }
+  }, [store.talonarios]);
 
   useEffect(() => {
     actions.numberFilter(store.ticketsReservados);
   }, [store.ticketsReservados]);
 
   useEffect(() => {
-    actions.getTickets(store.talonarioSelect.id);
+    if (store.talonarioSelect.constructor === Object) {
+      actions.getTickets(store.talonarioSelect.id);
+    }
   }, [store.talonarioSelect]);
 
   const updateStatus = (ticketNumber, liberar = false) => {

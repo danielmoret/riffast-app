@@ -118,9 +118,14 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       logout_talonario: () => {
+        const store = getStore();
         sessionStorage.removeItem("tokenUserTalonario");
         console.log("Login out");
         setStore({ tokenUserTalonario: null });
+        setStore({ talonarios: [] });
+        setStore({ talonarioSelect: [] });
+        setStore({ ticketsReservados: [] });
+        setStore({ tickets: [] });
       },
 
       crear_talonario: async (

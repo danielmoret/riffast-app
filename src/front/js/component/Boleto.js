@@ -1,7 +1,6 @@
 import React from "react";
 
 export const Boleto = (props) => {
-  console.log(props);
   return (
     <>
       <div className="boleto mt-5">

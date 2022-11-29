@@ -9,8 +9,6 @@ export const Login = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  console.log("This is your token", store.tokenUserTalonario);
-
   const sendData = (event) => {
     event.preventDefault();
     actions.login_talonario(email, password);
