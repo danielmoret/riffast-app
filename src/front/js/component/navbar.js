@@ -12,7 +12,7 @@ export const Navbar = () => {
         <Link to="/">
           <img src={rifast} className="logo" />
         </Link>
-        {!store.token ? (
+        {!store.tokenUserTalonario ? (
           <div className="ml-auto d-flex gap-2">
             <Link to="/login">
               <button className="btn login">Login</button>
@@ -22,14 +22,38 @@ export const Navbar = () => {
             </Link>
           </div>
         ) : (
-          <Link to="/">
-            <button
-              className="btn  register"
-              onClick={() => actions.logout_talonario()}
-            >
-              Logout
-            </button>
-          </Link>
+          <div className="d-flex gap-2">
+            <div className="dropdown">
+              <button
+                className="btn login dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Tus Talonarios
+              </button>
+              <ul className="dropdown-menu">
+                {store.talonarios.map((talonario) => (
+                  <li
+                    key={talonario.id}
+                    onClick={(e) => actions.selectTalonario(talonario.id)}
+                  >
+                    <span className="dropdown-item" href="#">
+                      {talonario.nombre}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <Link to="/">
+              <button
+                className="btn  register"
+                onClick={() => actions.logout_talonario()}
+              >
+                Logout
+              </button>
+            </Link>
+          </div>
         )}
       </div>
     </nav>

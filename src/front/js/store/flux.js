@@ -1,8 +1,14 @@
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
-      token: null,
+      tokenUserTalonario: null,
+      tokenUserTicket: null,
       message: null,
+      infoTicket: [],
+      talonarioSelect: [],
+      talonarios: [],
+      ticketsReservados: [],
+      tickets: [],
       demo: [
         {
           title: "FIRST",
@@ -20,12 +26,26 @@ const getState = ({ getStore, getActions, setStore }) => {
       // Use getActions to call a function within a fuction
 
       syncToken: () => {
-        const token = sessionStorage.getItem("token");
+        const tokenUserTalonario = sessionStorage.getItem("tokenUserTalonario");
+        const tokenUserTicket = sessionStorage.getItem("tokenUserTicket");
         console.log(
           "Aplication just loaded, synching the session storage token"
         );
-        if (token && token != "" && token != undefined)
-          setStore({ token: token });
+        if (
+          tokenUserTalonario &&
+          tokenUserTalonario != "" &&
+          tokenUserTalonario != undefined
+        ) {
+          setStore({ tokenUserTalonario: tokenUserTalonario });
+        }
+
+        if (
+          tokenUserTicket &&
+          tokenUserTicket != "" &&
+          tokenUserTicket != undefined
+        ) {
+          setStore({ tokenUserTicket: tokenUserTicket });
+        }
       },
 
       signup_talonario: async (fullName, email, phone, password) => {
@@ -45,7 +65,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         try {
           const resp = await fetch(
-            `https://3001-4geeksacade-reactflaskh-oq5jaeh2ojf.ws-us77.gitpod.io/api/user-talonario`,
+            `${process.env.BACKEND_URL}/api/user-talonario`,
             opts
           );
 
@@ -71,13 +91,14 @@ const getState = ({ getStore, getActions, setStore }) => {
           },
           body: JSON.stringify({
             email: email,
+            phone: email,
             password: password,
           }),
         };
 
         try {
           const resp = await fetch(
-            "https://3001-4geeksacade-reactflaskh-oq5jaeh2ojf.ws-us77.gitpod.io/api/login-talonario",
+            `${process.env.BACKEND_URL}/api/login-talonario`,
             opts
           );
 
@@ -88,8 +109,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 
           const data = await resp.json();
           console.log("this came from the backen", data);
-          sessionStorage.setItem("token", data.access_token);
-          setStore({ token: data.access_token });
+          sessionStorage.setItem("tokenUserTalonario", data.access_token);
+          setStore({ tokenUserTalonario: data.access_token });
           return true;
         } catch (error) {
           console.error("There was been an error login in");
@@ -97,30 +118,111 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       logout_talonario: () => {
-        sessionStorage.removeItem("token");
+        sessionStorage.removeItem("tokenUserTalonario");
         console.log("Login out");
-        setStore({ token: null });
+        setStore({ tokenUserTalonario: null });
+      },
+
+      crear_talonario: async (
+        nombre,
+        premio,
+        precio,
+        img,
+        descripcion,
+        fecha,
+        plataforma,
+        metodoPago
+      ) => {
+        const store = getStore();
+        const actions = getActions();
+        const opts = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${store.tokenUserTalonario}`,
+          },
+          body: JSON.stringify({
+            nombre: nombre,
+            premio: premio,
+            precio: precio,
+            imagen_premio: img,
+            descripcion: descripcion,
+            fecha_sorteo: fecha,
+            plataforma_sorteo: plataforma,
+            metodo_de_pago: metodoPago,
+          }),
+        };
+        try {
+          const resp = await fetch(
+            `${process.env.BACKEND_URL}/api/talonario`,
+            opts
+          );
+          if (!resp.ok) {
+            alert("no se pudo realizar esta accion");
+          }
+          const data = await resp.json();
+          console.log(data);
+        } catch (error) {
+          console.log(error);
+        }
+      },
+
+      obtenerTalonario: async () => {
+        const store = getStore();
+        const opts = {
+          headers: {
+            Authorization: `Bearer ${store.tokenUserTalonario}`,
+          },
+        };
+        try {
+          const resp = await fetch(
+            `${process.env.BACKEND_URL}/api/talonario`,
+            opts
+          );
+          if (!resp.ok) {
+            alert("no se pudo realizar");
+            return false;
+          }
+          let data = await resp.json();
+          setStore({ talonarios: data });
+        } catch (error) {
+          console.log();
+        }
+      },
+
+      selectTalonario: async (talonarioId) => {
+        const store = getStore();
+        const resp = await fetch(
+          `${process.env.BACKEND_URL}/api/talonario/${talonarioId}`
+        );
+        try {
+          if (!resp.ok) {
+            alert("No se pudo encontrar un talonario especifico");
+          }
+          let data = await resp.json();
+          setStore({ talonarioSelect: data });
+        } catch (error) {}
       },
 
       exampleFunction: () => {
         getActions().changeColor(0, "green");
       },
 
-      login_ticket: async (correo, telefono) => {
+      login_ticket: async (correo) => {
         const opts = {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            correo: correo,
-            telefono: telefono,
+            email: correo,
+            phone: correo,
           }),
         };
 
         try {
           const resp = await fetch(
-            "https://3001-4geeksacade-reactflaskh-oq5jaeh2ojf.ws-us77.gitpod.io/api/login-ticket",
+            `${process.env.BACKEND_URL}/api/login-ticket`,
             opts
           );
 
@@ -131,12 +233,150 @@ const getState = ({ getStore, getActions, setStore }) => {
 
           const data = await resp.json();
           console.log("this came from the backen", data);
-          sessionStorage.setItem("token", data.access_token);
-          setStore({ token: data.access_token });
+          sessionStorage.setItem("tokenUserTicket", data.access_token);
+          setStore({ tokenUserTicket: data.access_token });
           return true;
         } catch (error) {
           console.error("There was been an error login in");
         }
+      },
+
+      buyTickets: async (fullName, phone, email) => {
+        const opts = {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify({
+            full_name: fullName,
+            phone: phone,
+            email: email,
+          }),
+        };
+
+        try {
+          const response = await fetch(
+            `${process.env.BACKEND_URL}/api/user-ticket`,
+            opts
+          );
+          if (!response.ok) {
+            let msg = await response.json();
+            alert(msg.msg);
+            return false;
+          }
+          const data = await response.json();
+          console.log(data);
+        } catch (error) {
+          console.error(error);
+        }
+      },
+
+      crearTicket: async (numeroTicket, talonario_id) => {
+        const store = getStore();
+        const opts = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${store.tokenUserTicket}`,
+          },
+          body: JSON.stringify({
+            numero: numeroTicket,
+            talonario_id: talonario_id,
+            status: "reservado",
+          }),
+        };
+        try {
+          const resp = await fetch(
+            `${process.env.BACKEND_URL}/api/ticket`,
+            opts
+          );
+          if (!resp.ok) {
+            alert("no se pudo crear ticket");
+          }
+          const data = await resp.json();
+          console.log(data);
+        } catch (error) {
+          console.error(error);
+        }
+      },
+
+      getTickets: async () => {
+        const store = getStore();
+        const opts = {
+          headers: {
+            Authorization: `Bearer ${store.tokenUserTalonario}`,
+          },
+        };
+        const resp = await fetch(
+          `${process.env.BACKEND_URL}/api/tickets`,
+          opts
+        );
+        try {
+          if (!resp.ok) {
+            alert("No se obtuvieros tickets");
+          }
+          let data = await resp.json();
+          setStore({ ticketsReservados: data });
+        } catch (error) {
+          console.error(error);
+        }
+      },
+
+      infoTicket: async (numero, talonarioID) => {
+        const resp = await fetch(
+          `${process.env.BACKEND_URL}/api/info-ticket/${numero}/${talonarioID}`
+        );
+        try {
+          if (!resp.ok) {
+            alert("No se obtuvo info de ticket");
+          }
+          let data = await resp.json();
+          console.log(data);
+          setStore({ infoTicket: data });
+        } catch (error) {
+          console.error(error);
+        }
+      },
+
+      numberFilter: (numeros) => {
+        const store = getStore();
+        let num = [];
+        const numerosReservados = numeros.map((numero) => {
+          if (numero.status == "reservado") {
+            return numero.numero;
+          }
+        });
+
+        for (let i = 0; i < 100; i++) {
+          if (numerosReservados.includes(i)) {
+            num.push({
+              value: i.toString().padStart(2, "0"),
+              numero: i,
+              status: "reservado",
+            });
+          } else {
+            num.push({
+              value: i.toString().padStart(2, "0"),
+              numero: i,
+              status: "disponible",
+            });
+          }
+        }
+
+        setStore({ tickets: num });
+      },
+
+      numberBuilder: (num) => {
+        let numbers = [];
+
+        for (let i = 0; i < num; i++) {
+          numbers.push({
+            value: i.toString().padStart(2, "0"),
+            status: "disponible",
+          });
+        }
+
+        return numbers;
       },
 
       getMessage: async () => {

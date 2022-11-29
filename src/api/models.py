@@ -7,8 +7,15 @@ db = SQLAlchemy()
 class Ticket(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     numero = db.Column(db.Integer, nullable=False)
+    status = db.Column(db.String, nullable=False )
     talonario_id = db.Column(db.Integer, db.ForeignKey('talonario.id'))
     user_ticket_id = db.Column(db.Integer, db.ForeignKey('user_ticket.id'))
+
+    def __init__(self, **kwargs):
+        self.numero = kwargs['numero']
+        self.talonario_id = kwargs['talonario_id']
+        self.status = kwargs['status']
+        self.user_ticket_id = kwargs['user_ticket_id']
     
     @classmethod
     def create(cls, **kwargs):
@@ -26,7 +33,8 @@ class Ticket(db.Model):
         "id": self.id,
         "numero": self.numero,
         "talonario_id" : self.talonario_id,
-        "user_ticket_id" : self.user_ticket_id
+        "status" : self.status,
+        "user_ticket_id" : self.user_ticket_id,
         }
 
 class User(db.Model):

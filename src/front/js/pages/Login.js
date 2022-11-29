@@ -9,29 +9,35 @@ export const Login = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  console.log("This is your token", store.token);
+  console.log("This is your token", store.tokenUserTalonario);
 
   const sendData = (event) => {
     event.preventDefault();
     actions.login_talonario(email, password);
   };
 
-  if (store.token && store.token !== "" && store.token !== undefined) {
+  if (
+    store.tokenUserTalonario &&
+    store.tokenUserTalonario !== "" &&
+    store.tokenUserTalonario !== undefined
+  ) {
     navigate("/raffler");
   }
 
   return (
     <div className="mt-5 signup min-vh-100">
       <h1 className="text-center">Bienvenido</h1>
-      {store.token && store.token != "" && store.token != undefined ? (
-        "You are logged in with this token " + store.token
+      {store.tokenUserTalonario &&
+      store.tokenUserTalonario != "" &&
+      store.tokenUserTalonario != undefined ? (
+        "You are logged in with this token " + store.tokenUserTalonario
       ) : (
         <form onSubmit={sendData}>
           <div className="form-group mb-2">
             <label className="form-label fw-bold">Email o teléfono</label>
             <input
               className="form-control"
-              type="email"
+              type="text"
               value={email}
               onChange={(event) => setEmail(event.target.value)}
             />
@@ -50,7 +56,7 @@ export const Login = () => {
           <input
             className="btn btn-primary w-100 btn-signup"
             type="submit"
-            value="Ingresa ya!"
+            value="¡Ingresa ya!"
           />
           <div className="text-center mt-2">
             ¿No tienes cuenta?&nbsp;

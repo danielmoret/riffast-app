@@ -2,6 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 import os
+from sqlalchemy import or_
 from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, User, Ticket, Talonario, User_ticket
 from api.utils import generate_sitemap, APIException
@@ -30,13 +31,12 @@ def login_ticket():
     email = request.json.get("email", None)
     phone = request.json.get("phone", None)
     
-    user_phone = User_ticket.query.filter_by( phone = phone).first()
-    if user_phone is None:
-        user_email = User_ticket.query.filter_by( phone = phone).first()
-        if user_email is None:
+    user_ticket = User_ticket.query.filter(or_(User_ticket.phone == phone,  User_ticket.email ==email) ).first()
+    if user_ticket is None:
             return jsonify({"msg": "El telefono o email no son correctos"}), 401
     
-    return jsonify({"msg": "Login ticket satisfactorio"}), 401
+    access_token = create_access_token(identity=user_ticket.id)
+    return jsonify({"access_token" : access_token, "user_ticket_id":user_ticket.id, "nombre":user_ticket.full_name, "user_email":user_ticket.phone}),200
 
 #Signup user_ticket
 @api.route('/user-ticket', methods=['GET','POST'])
@@ -56,10 +56,14 @@ def get_users():
             raise Exception("No ingresaste el nombre completo",400)
         if "phone" not in new_user_data or new_user_data["phone"] == "": 
             raise Exception("No ingresaste el phone",400)
+
         new_user = User_ticket.create(**new_user_data)
+
         return jsonify(new_user.serialize()),200
     except Exception as error:
         return jsonify(error.args[0]),error.args[1] if len(error.args) > 1 else 500
+
+
 
 #Abraham 
 @api.route("/login-talonario", methods=['POST'])
@@ -67,8 +71,9 @@ def login_talonario():
     
     email = request.json.get("email", None)
     password = request.json.get("password", None)
-
-    user = User.query.filter_by(email=email, password=password).first()
+    phone = request.json.get("phone", None)
+    
+    user = User.query.filter(or_(User.phone == phone,  User.email ==email), User.password == password ).first()
     if user is None : 
         return jsonify({"msg":"El usuario o la contraseña son incorrectos"}), 401
     
@@ -106,10 +111,13 @@ def signup_talonario():
         
 #Talonarios
 @api.route('/talonario', methods=['POST', 'GET'])
+@jwt_required()
 def get_talonarios():
 
+    user_id = get_jwt_identity()
+
     if request.method == "GET" :
-        talonarios = Talonario.query.all()
+        talonarios = Talonario.query.filter_by(user_id = user_id)
         talonarios_dictionaries = []
 
         for talonario in talonarios :
@@ -120,7 +128,7 @@ def get_talonarios():
     new_talonario_data = request.json
 
     try: 
-        new_talonario = Talonario.create(**new_talonario_data)
+        new_talonario = Talonario.create(**new_talonario_data, user_id = user_id)
         return jsonify(new_talonario.serialize()), 201
     except Exception as error:
         return jsonify(error.args[0]),error.args[1] if len(error.args) > 1 else 500
@@ -137,9 +145,13 @@ def get_talonario(talonario_id):
 
 #tickets
 @api.route('/ticket', methods=['POST', 'GET'])
+@jwt_required()
 def get_tickets():
+
+    user_ticket_id = get_jwt_identity()
+
     if request.method == "GET":
-        tickets = Ticket.query.all()
+        tickets = Ticket.query.filter_by(user_ticket_id = user_ticket_id)
         tickets_dictionaries = []
         for ticket in tickets :
             tickets_dictionaries.append(ticket.serialize())
@@ -148,7 +160,7 @@ def get_tickets():
     
     new_ticket_data = request.json
     try:
-        new_ticket = Ticket.create(**new_ticket_data)
+        new_ticket = Ticket.create(**new_ticket_data, user_ticket_id = user_ticket_id)
         return jsonify(new_ticket.serialize()), 201
     
     except Exception as error:
@@ -165,5 +177,35 @@ def get_ticket(ticket_id):
     except Exception as error:
         return jsonify({'msg':'ticket no existe'})
 
+@api.route('/tickets', methods=['GET'])
+@jwt_required()
+def get_tickets_talonario():
 
+    user_id = get_jwt_identity()
+
+    talonarios = Talonario.query.filter_by(user_id = user_id).first()
+    tickets = Ticket.query.filter_by(talonario_id = talonarios.id)
+    try:
+        ticket_dictio = []
+        for ticket in tickets:
+            ticket_dictio.append(ticket.serialize())
+
+        return jsonify(ticket_dictio),200
+
+    except Exception as error:
+        return jsonify({'msg':'No hay tickets para ese talonario'})
+
+
+@api.route('/info-ticket/<int:numero>/<int:talonario_id>', methods=['GET'])
+def info_ticket(numero,talonario_id):
+
+    ticket = Ticket.query.filter_by(numero = numero, talonario_id = talonario_id).first()
+
+    user_ticket = User_ticket.query.filter_by(id = ticket.user_ticket_id)
+
+    try:
+        return jsonify(user_ticket[0].serialize())
+
+    except Exception as error:
+        return jsonify({'msg':'user_ticket no existe'}),400
 

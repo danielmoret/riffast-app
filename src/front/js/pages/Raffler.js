@@ -1,14 +1,32 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Talonario } from "../extras/talonario";
 import { DatosTalonario } from "../component/DatosTalonario";
 import { LeyendaNumeros } from "../component/LeyendaNumeros";
 import { Boleto } from "../component/Boleto";
+import { Context } from "../store/appContext";
 
 export const Raffler = () => {
   let talonario = new Talonario(100, "carro", "10$", "Chance A", "25/11/2022");
   const numerosTalonario = talonario.numeros;
+  const { store, actions } = useContext(Context);
   const [ticketSeleccionado, setTicketSeleccionado] = useState({});
-  const [tickets, setTickets] = useState(numerosTalonario);
+  const [tickets, setTickets] = useState(store.tickets);
+
+  useEffect(() => {
+    if (
+      store.tokenUserTalonario &&
+      store.tokenUserTalonario !== "" &&
+      store.tokenUserTalonario !== undefined
+    ) {
+      actions.obtenerTalonario();
+      actions.selectTalonario(1);
+      actions.getTickets();
+    }
+  }, [store.tokenUserTalonario]);
+
+  useEffect(() => {
+    actions.numberFilter(store.ticketsReservados);
+  }, [store.ticketsReservados]);
 
   const updateStatus = (ticketNumber, liberar = false) => {
     if (ticketNumber.status == "disponible" && liberar == false) {
@@ -40,12 +58,14 @@ export const Raffler = () => {
 
   return (
     <>
-      <Boleto />
+      {store.talonarios.length > 0 && (
+        <Boleto talonario={store.talonarioSelect} />
+      )}
       <div className="text-center mt-5 mb-5">
         <h1>Tickets</h1>
         <LeyendaNumeros />
         <div className="talonario d-flex flex-wrap justify-content-center p-2 gap-2">
-          {tickets.map((numero, index) => (
+          {store.tickets.map((numero, index) => (
             <div
               value={`${numero.status} ${numero.value}`}
               key={index}
@@ -61,6 +81,7 @@ export const Raffler = () => {
               onClick={(e) =>
                 setTicketSeleccionado({
                   value: numero.value,
+                  numero: numero.numero,
                   status: numero.status,
                 })
               }
@@ -99,6 +120,12 @@ export const Raffler = () => {
                   className="btn btn-outline-dark btn-closed"
                   data-bs-target="#exampleModalToggle2"
                   data-bs-toggle="modal"
+                  onClick={(e) =>
+                    actions.infoTicket(
+                      ticketSeleccionado.numero,
+                      store.talonarioSelect.id
+                    )
+                  }
                 >
                   Ver datos del participante
                 </button>
@@ -164,13 +191,13 @@ export const Raffler = () => {
             <div className="modal-body">
               <div className="d-flex flex-column">
                 <span>
-                  <strong>Nombre:</strong>
+                  <strong>Nombre: {store.infoTicket.full_name}</strong>
                 </span>
                 <span>
-                  <strong>Teléfono:</strong>
+                  <strong>Teléfono: {store.infoTicket.phone}</strong>
                 </span>
                 <span>
-                  <strong>Email:</strong>
+                  <strong>Email: {store.infoTicket.email}</strong>
                 </span>
               </div>
             </div>
