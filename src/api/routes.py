@@ -63,6 +63,8 @@ def get_users():
     except Exception as error:
         return jsonify(error.args[0]),error.args[1] if len(error.args) > 1 else 500
 
+
+
 #Abraham 
 @api.route("/login-talonario", methods=['POST'])
 def login_talonario():
@@ -175,5 +177,35 @@ def get_ticket(ticket_id):
     except Exception as error:
         return jsonify({'msg':'ticket no existe'})
 
+@api.route('/tickets', methods=['GET'])
+@jwt_required()
+def get_tickets_talonario():
 
+    user_id = get_jwt_identity()
+
+    talonarios = Talonario.query.filter_by(user_id = user_id).first()
+    tickets = Ticket.query.filter_by(talonario_id = talonarios.id)
+    try:
+        ticket_dictio = []
+        for ticket in tickets:
+            ticket_dictio.append(ticket.serialize())
+
+        return jsonify(ticket_dictio),200
+
+    except Exception as error:
+        return jsonify({'msg':'No hay tickets para ese talonario'})
+
+
+@api.route('/info-ticket/<int:numero>/<int:talonario_id>', methods=['GET'])
+def info_ticket(numero,talonario_id):
+
+    ticket = Ticket.query.filter_by(numero = numero, talonario_id = talonario_id).first()
+
+    user_ticket = User_ticket.query.filter_by(id = ticket.user_ticket_id)
+
+    try:
+        return jsonify(user_ticket[0].serialize())
+
+    except Exception as error:
+        return jsonify({'msg':'user_ticket no existe'}),400
 
