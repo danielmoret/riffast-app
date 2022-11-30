@@ -38,7 +38,9 @@ export const VistaTickets = (props) => {
                 <span>
                   <strong>Estatus</strong>: {ticket.status}
                 </span>
-                <button className="btn-eliminar-ticket btn">Eliminar</button>
+                {ticket.status == "reservado" && (
+                  <button className="btn-eliminar-ticket btn">Eliminar</button>
+                )}
               </div>
             );
           }
