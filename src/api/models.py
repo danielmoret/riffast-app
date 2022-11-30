@@ -36,6 +36,17 @@ class Ticket(db.Model):
             return {"msg":"el ticket fue eliminado correctamente"}
         except Exception as error:
             raise Exception(error.args[0],400)
+    
+    @classmethod
+    def update_ticket(cls,kwargs):
+        kwargs.status = "pagado"
+        db.session.add(kwargs)
+        try:
+            db.session.commit()
+            return kwargs
+        except Exception as error:
+            raise Exception(error.args[0],400)
+
 
     def serialize(self):
         return {

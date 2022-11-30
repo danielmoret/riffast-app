@@ -219,4 +219,15 @@ def delete_ticket(numero, talonario_id):
     except Exception as error:
         return jsonify({'msg': 'el ticket no se pudo eliminar'}),400
 
+#Actualizar status a pagado en la BD en el ticket correspondiente cuando se hace click en el botón "marcar como pagado"
+@api.route('/paid-ticket/<int:numero>/<int:talonario_id>', methods=['GET'])
+def update_status(numero, talonario_id):
+    ticket = Ticket.query.filter_by(numero = numero, talonario_id = talonario_id).first()
+    
+    try:
+        ticket_update = Ticket.update_ticket(ticket)
+        return jsonify(ticket_update.serialize()),200
+
+    except Exception as error:
+        return jsonify({'msg': 'el ticket no se pudo actualizar'}),400
 

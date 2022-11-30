@@ -368,11 +368,35 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
+      updateStatusToPaid: async (numeroTicket, talonarioId) => {
+        const store = getStore();
+        const actions = getActions();
+        const resp = await fetch(
+          `${process.env.BACKEND_URL}/api/paid-ticket/${numeroTicket}/${talonarioId}`
+        );
+        try {
+          if (!resp.ok) {
+            alert("No se actualizo el ticket");
+          }
+          let data = await resp.json();
+          actions.getTickets(store.talonarioSelect.id);
+          console.log(data);
+        } catch (error) {
+          console.error(error);
+        }
+      },
+
       numberFilter: (numeros) => {
         const store = getStore();
         let num = [];
         const numerosReservados = numeros.map((numero) => {
           if (numero.status == "reservado") {
+            return numero.numero;
+          }
+        });
+
+        const numerosPagados = numeros.map((numero) => {
+          if (numero.status == "pagado") {
             return numero.numero;
           }
         });
@@ -384,6 +408,12 @@ const getState = ({ getStore, getActions, setStore }) => {
               numero: i,
               status: "reservado",
             });
+          } else if (numerosPagados.includes(i)) {
+            num.push({
+              value: i.toString().padStart(2, "0"),
+              numero: i,
+              status: "pagado",
+            });
           } else {
             num.push({
               value: i.toString().padStart(2, "0"),
@@ -394,19 +424,6 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
 
         setStore({ tickets: num });
-      },
-
-      numberBuilder: (num) => {
-        let numbers = [];
-
-        for (let i = 0; i < num; i++) {
-          numbers.push({
-            value: i.toString().padStart(2, "0"),
-            status: "disponible",
-          });
-        }
-
-        return numbers;
       },
 
       getMessage: async () => {

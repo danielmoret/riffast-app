@@ -43,7 +43,11 @@ export const Raffler = () => {
     console.log(numeroTicket, talonarioId);
   };
 
-  const updateStatus = (ticketNumber, liberar = false) => {
+  const updateStatusToPaid = (numeroTicket, talonarioId) => {
+    actions.updateStatusToPaid(numeroTicket, talonarioId);
+  };
+
+  /*  const updateStatus = (ticketNumber, liberar = false) => {
     if (ticketNumber.status == "disponible" && liberar == false) {
       setTickets(
         tickets.map((ticket) => {
@@ -70,7 +74,7 @@ export const Raffler = () => {
       );
     }
   };
-
+ */
   return (
     <>
       {store.talonarios.length > 0 && (
@@ -171,16 +175,19 @@ export const Raffler = () => {
                 </button>
               )}
 
-              {ticketSeleccionado.status != "pagado" && (
+              {ticketSeleccionado.status == "reservado" && (
                 <button
                   type="button"
                   className="btn btn-primary register"
                   data-bs-dismiss="modal"
-                  onClick={(e) => updateStatus(ticketSeleccionado)}
+                  onClick={(e) =>
+                    updateStatusToPaid(
+                      ticketSeleccionado.numero,
+                      store.talonarioSelect.id
+                    )
+                  }
                 >
-                  {ticketSeleccionado.status == "disponible"
-                    ? "Reservar"
-                    : "Marcar como pagado"}
+                  Marcar como pagado
                 </button>
               )}
             </div>
