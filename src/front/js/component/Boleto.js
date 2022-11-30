@@ -1,6 +1,10 @@
 import React from "react";
 
 export const Boleto = (props) => {
+  if (props.talonario.fecha_sorteo != undefined) {
+    console.log(dateFormat(props.talonario.fecha_sorteo));
+  }
+
   return (
     <>
       <div className="boleto mt-5">

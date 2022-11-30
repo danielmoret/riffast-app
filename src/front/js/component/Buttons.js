@@ -33,7 +33,7 @@ export const Buttons = (props) => {
               ></button>
             </div>
             <div className="modal-body">
-              ¿Has concursado en<i>Riffast</i>anteriormente?
+              ¿Has concursado en <i> Riffast </i> anteriormente?
             </div>
             <div className="modal-footer">
               <button
