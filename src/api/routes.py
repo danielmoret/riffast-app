@@ -177,6 +177,7 @@ def get_ticket(ticket_id):
     except Exception as error:
         return jsonify({'msg':'ticket no existe'})
 
+#Obtener todos los tickets de un talonario en especifico
 @api.route('/tickets/<int:talonario_id>', methods=['GET'])
 def get_tickets_talonario(talonario_id):
 
@@ -192,7 +193,7 @@ def get_tickets_talonario(talonario_id):
     except Exception as error:
         return jsonify({'msg':'No hay tickets para ese talonario'})
 
-
+#Obtener la informacion del comprador de un ticket
 @api.route('/info-ticket/<int:numero>/<int:talonario_id>', methods=['GET'])
 def info_ticket(numero,talonario_id):
 
@@ -223,7 +224,7 @@ def delete_ticket(numero, talonario_id):
 @api.route('/paid-ticket/<int:numero>/<int:talonario_id>', methods=['GET'])
 def update_status(numero, talonario_id):
     ticket = Ticket.query.filter_by(numero = numero, talonario_id = talonario_id).first()
-    
+
     try:
         ticket_update = Ticket.update_ticket(ticket)
         return jsonify(ticket_update.serialize()),200

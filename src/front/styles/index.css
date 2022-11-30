@@ -400,3 +400,15 @@ footer {
 .modal-footer {
   background-color: #fed163;
 }
+
+.numero-ticket-no-pagado {
+  color: black;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.numero-ticket-pagado {
+  color: #fed163;
+  font-size: 30px;
+  font-weight: bold;
+}

@@ -4,6 +4,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       tokenUserTalonario: null,
       tokenUserTicket: null,
       message: null,
+      userTicketId: null,
       infoTicket: [],
       talonarioSelect: [],
       talonarios: [],
@@ -214,6 +215,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       login_ticket: async (correo) => {
+        const store = getStore();
         const opts = {
           method: "POST",
           headers: {
@@ -240,6 +242,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.log("this came from the backen", data);
           sessionStorage.setItem("tokenUserTicket", data.access_token);
           setStore({ tokenUserTicket: data.access_token });
+          setStore({ userTicketId: data.user_ticket_id });
           return true;
         } catch (error) {
           console.error("There was been an error login in");

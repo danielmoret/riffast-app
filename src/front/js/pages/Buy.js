@@ -164,7 +164,14 @@ export const Buy = () => {
           </div>
           {store.tokenUserTicket &&
             store.tokenUserTicket !== "" &&
-            store.tokenUserTicket !== undefined && <VistaTickets />}
+            store.tokenUserTicket !== undefined &&
+            store.userTicketId !== null && (
+              <VistaTickets
+                key={store.talonarioSelect.id}
+                userID={store.userTicketId}
+                tickets={store.ticketsReservados}
+              />
+            )}
         </>
       ) : (
         buySelect === "previousbuy" && (
