@@ -344,25 +344,29 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       deleteTicket: async (numeroTicket, talonarioId) => {
+        const store = getStore();
+        const actions = getActions();
+        const opts = {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        };
         const resp = await fetch(
-          `${process.env.BACKEND_URL}/api/delete-ticket/${numeroTicket}/${talonarioId}`
+          `${process.env.BACKEND_URL}/api/delete-ticket/${numeroTicket}/${talonarioId}`,
+          opts
         );
         try {
           if (!resp.ok) {
-            alert("No se elimino ticket");
+            alert("No se elimino el ticket");
           }
           let data = await resp.json();
+          actions.getTickets(store.talonarioSelect.id);
           console.log(data);
-          setStore({ infoTicket: data });
         } catch (error) {
           console.error(error);
         }
-
-        
       },
-
-
-
 
       numberFilter: (numeros) => {
         const store = getStore();

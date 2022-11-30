@@ -11,7 +11,6 @@ export const Boleto = (props) => {
   if (props.talonario.fecha_sorteo != undefined) {
     dateOfRaffle = dateFormat(props.talonario.fecha_sorteo);
   }
-  console.log(dateOfRaffle);
   return (
     <>
       <div className="boleto mt-5">

@@ -28,6 +28,15 @@ class Ticket(db.Model):
         except Exception as error:
             raise Exception(error.args[0],400)
 
+    @classmethod
+    def delete_ticket(cls,kwargs):
+        db.session.delete(kwargs)
+        try:
+            db.session.commit()
+            return {"msg":"el ticket fue eliminado correctamente"}
+        except Exception as error:
+            raise Exception(error.args[0],400)
+
     def serialize(self):
         return {
         "id": self.id,
