@@ -38,6 +38,11 @@ export const Raffler = () => {
     }
   }, [store.talonarioSelect]);
 
+  const deleteTicket = (numeroTicket, talonarioId) => {
+    
+  }
+
+
   const updateStatus = (ticketNumber, liberar = false) => {
     if (ticketNumber.status == "disponible" && liberar == false) {
       setTickets(
@@ -155,7 +160,7 @@ export const Raffler = () => {
                   type="button"
                   className="btn btn-success btn-liberar"
                   data-bs-dismiss="modal"
-                  onClick={(e) => updateStatus(ticketSeleccionado, true)}
+                  onClick={(e) => deleteTicket()}
                 >
                   Liberar Ticket
                 </button>
