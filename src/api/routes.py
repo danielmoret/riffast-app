@@ -206,3 +206,16 @@ def info_ticket(numero,talonario_id):
     except Exception as error:
         return jsonify({'msg':'user_ticket no existe'}),400
 
+
+# Eliminar de la BD el ticket cuando se hace click en eliminar (Vista /Buy seccion mis Tickets)
+@api.route('/delete-ticket/<int:numero>/<int:talonario_id>', methods=['GET'])
+def delete_ticket(numero, talonario_id):
+    ticket = Ticket.query.filter_by(numero = numero, talonario_id = talonario_id).first()
+
+    try:
+        return jsonify(ticket.serialize())
+
+    except Exception as error:
+        return jsonify({'msg': 'el ticket no se pudo eliminar'}),400
+
+

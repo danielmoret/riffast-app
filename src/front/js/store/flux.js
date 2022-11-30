@@ -343,6 +343,27 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
+      deleteTicket: async (numeroTicket, talonarioId) => {
+        const resp = await fetch(
+          `${process.env.BACKEND_URL}/api/delete-ticket/${numeroTicket}/${talonarioId}`
+        );
+        try {
+          if (!resp.ok) {
+            alert("No se elimino ticket");
+          }
+          let data = await resp.json();
+          console.log(data);
+          setStore({ infoTicket: data });
+        } catch (error) {
+          console.error(error);
+        }
+
+        
+      },
+
+
+
+
       numberFilter: (numeros) => {
         const store = getStore();
         let num = [];
