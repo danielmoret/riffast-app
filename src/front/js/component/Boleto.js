@@ -1,6 +1,17 @@
 import React from "react";
 
 export const Boleto = (props) => {
+  let dateOfRaffle = "";
+
+  let dateFormat = (fecha) => {
+    let newDate = fecha.slice(4, -13);
+    return newDate;
+  };
+
+  if (props.talonario.fecha_sorteo != undefined) {
+    dateOfRaffle = dateFormat(props.talonario.fecha_sorteo);
+  }
+  console.log(dateOfRaffle);
   return (
     <>
       <div className="boleto mt-5">
@@ -34,9 +45,7 @@ export const Boleto = (props) => {
               </div>
               <div className="fs-5  d-flex">
                 <strong>Fecha:</strong>
-                <div className="item-talonario ms-2">
-                  {props.talonario.fecha_sorteo}
-                </div>
+                <div className="item-talonario ms-2 w-100">{dateOfRaffle}</div>
               </div>
             </div>
             <img
