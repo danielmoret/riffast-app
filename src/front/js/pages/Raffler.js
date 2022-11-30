@@ -1,16 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Talonario } from "../extras/talonario";
-import { DatosTalonario } from "../component/DatosTalonario";
 import { LeyendaNumeros } from "../component/LeyendaNumeros";
 import { Boleto } from "../component/Boleto";
 import { Context } from "../store/appContext";
 
 export const Raffler = () => {
-  let talonario = new Talonario(100, "carro", "10$", "Chance A", "25/11/2022");
-  const numerosTalonario = talonario.numeros;
   const { store, actions } = useContext(Context);
   const [ticketSeleccionado, setTicketSeleccionado] = useState({});
-  const [tickets, setTickets] = useState(store.tickets);
 
   useEffect(() => {
     if (
@@ -47,34 +42,6 @@ export const Raffler = () => {
     actions.updateStatusToPaid(numeroTicket, talonarioId);
   };
 
-  /*  const updateStatus = (ticketNumber, liberar = false) => {
-    if (ticketNumber.status == "disponible" && liberar == false) {
-      setTickets(
-        tickets.map((ticket) => {
-          if (ticket.value == ticketNumber.value) {
-            return { value: ticket.value, status: "reservado" };
-          } else return ticket;
-        })
-      );
-    } else if (ticketNumber.status == "reservado" && liberar == false) {
-      setTickets(
-        tickets.map((ticket) => {
-          if (ticket.value == ticketNumber.value) {
-            return { value: ticket.value, status: "pagado" };
-          } else return ticket;
-        })
-      );
-    } else if (ticketNumber.status == "reservado" && liberar == true) {
-      setTickets(
-        tickets.map((ticket) => {
-          if (ticket.value == ticketNumber.value) {
-            return { value: ticket.value, status: "disponible" };
-          } else return ticket;
-        })
-      );
-    }
-  };
- */
   return (
     <>
       {store.talonarios.length > 0 && (

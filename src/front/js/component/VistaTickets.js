@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Context } from "../store/appContext";
 
 export const VistaTickets = (props) => {
-  console.log(props);
+  const { store, actions } = useContext(Context);
+
+  const deleteTicket = (numeroTicket, talonarioId) => {
+    actions.deleteTicket(numeroTicket, talonarioId);
+    console.log(numeroTicket, talonarioId);
+  };
   return (
     <>
       <div className="text-center mt-5">
@@ -39,7 +45,14 @@ export const VistaTickets = (props) => {
                   <strong>Estatus</strong>: {ticket.status}
                 </span>
                 {ticket.status == "reservado" && (
-                  <button className="btn-eliminar-ticket btn">Eliminar</button>
+                  <button
+                    className="btn-eliminar-ticket btn"
+                    onClick={(e) =>
+                      deleteTicket(ticket.numero, ticket.talonario_id)
+                    }
+                  >
+                    Eliminar
+                  </button>
                 )}
               </div>
             );
