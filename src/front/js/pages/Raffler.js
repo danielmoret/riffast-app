@@ -87,7 +87,7 @@ export const Raffler = () => {
           </div>
         </>
       ) : (
-        <div>No posees talonarios</div>
+        <Link to="/raffleRegistration" className="btn boton btn-primary btn-signup">Crear nuevo talonario</Link>
       )}
 
       <div
