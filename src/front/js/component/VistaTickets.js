@@ -11,9 +11,63 @@ export const VistaTickets = (props) => {
   return (
     <>
       <div className="text-center mt-5">
-        <button className="btn register p-2">
+        {/* Button trigger modal */}
+        <button
+          type="button"
+          className="btn register p-2"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal1"
+        >
           Contactar responsable de la rifa
         </button>
+      </div>
+
+      {/* Modal */}
+      <div
+        className="modal fade"
+        id="exampleModal1"
+        tabindex={-1}
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h1 className="modal-title fs-5" id="exampleModalLabel">
+                Datos del responsable de la rifa
+              </h1>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div className="modal-body d-flex flex-column">
+              <span>
+                <strong>Nombre: </strong>
+                {props.userData.full_name}
+              </span>
+              <span>
+                <strong>Teléfono: </strong>
+                {props.userData.phone}
+              </span>
+              <span>
+                <strong>Email: </strong>
+                {props.userData.email}
+              </span>
+            </div>
+            <div className="modal-footer">
+              <button
+                type="button"
+                className="btn login"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div className="vista-tickets d-flex justify-content-around flex-wrap gap-2 mt-3">

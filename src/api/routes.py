@@ -207,6 +207,20 @@ def info_ticket(numero,talonario_id):
     except Exception as error:
         return jsonify({'msg':'user_ticket no existe'}),400
 
+#Obtener la informacion del creador del talonario
+@api.route('/info-talonario/<int:talonario_id>', methods=['GET'])
+def info_creador_tlonario(talonario_id):
+
+    talonario = Talonario.query.filter_by(id = talonario_id).first()
+
+    user_talonario = User.query.filter_by( id = talonario.user_id).first()
+
+    try:
+        return jsonify(user_talonario.serialize())
+
+    except Exception as error:
+        return jsonify({'msg':'talonario no existe'}),400
+
 
 # Eliminar de la BD el ticket cuando se hace click en eliminar (Vista /Buy seccion mis Tickets)
 @api.route('/delete-ticket/<int:numero>/<int:talonario_id>', methods=['DELETE'])

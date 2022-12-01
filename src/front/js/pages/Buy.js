@@ -14,6 +14,7 @@ export const Buy = () => {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [correo, setCorreo] = useState("");
+  const [datosUser, setDatosUser] = useState([]);
 
   useEffect(() => {
     actions.selectTalonario(params.talonario_id);
@@ -32,6 +33,22 @@ export const Buy = () => {
   useEffect(() => {
     actions.numberFilter(store.ticketsReservados);
   }, [store.ticketsReservados]);
+
+  useEffect(() => {
+    fetch(
+      `${process.env.BACKEND_URL}/api/info-talonario/${store.talonarioSelect.id}`
+    )
+      .then((resp) => {
+        if (resp.ok) {
+          return resp.json();
+        }
+        throw new Error("Algo salio mal");
+      })
+      .then((data) => {
+        setDatosUser(data);
+      })
+      .catch((err) => console.error(err));
+  }, [store.tokenUserTicket]);
 
   const sendData = async (e) => {
     e.preventDefault();
@@ -145,7 +162,7 @@ export const Buy = () => {
           <div className="d-flex justify-content-center mt-5">
             <div className="form-group m-2 select-ticket">
               <label className="form-label">
-                Ingresa el número o email registrado en la rifa
+                Ingrese email o teléfono registrado en la rifa
               </label>
               <input
                 className="form-control mb-3"
@@ -153,11 +170,7 @@ export const Buy = () => {
                 value={correo}
                 onChange={(event) => setCorreo(event.target.value)}
               />
-              <button
-                type="submit"
-                className="my-button rounded"
-                onClick={consultar}
-              >
+              <button type="submit" className="btn login" onClick={consultar}>
                 Consultar
               </button>
             </div>
@@ -168,6 +181,7 @@ export const Buy = () => {
             store.userTicketId !== null && (
               <VistaTickets
                 key={store.talonarioSelect.id}
+                userData={datosUser}
                 userID={store.userTicketId}
                 tickets={store.ticketsReservados}
               />
@@ -196,7 +210,7 @@ export const Buy = () => {
               </select>
 
               <label className="form-label">
-                Ingrese email o telefono registrado anteriormente
+                Ingrese email o teléfono registrado anteriormente
               </label>
               <input
                 className="form-control mb-3"
