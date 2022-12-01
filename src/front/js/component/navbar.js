@@ -25,7 +25,8 @@ export const Navbar = () => {
           </div>
         ) : (
           <div className="d-flex gap-2">
-            {location.pathname == "/" ? (
+            {location.pathname == "/" ||
+            location.pathname == "/raffleregistration" ? (
               <Link to="/raffler" className="btn login">
                 Rifas
               </Link>

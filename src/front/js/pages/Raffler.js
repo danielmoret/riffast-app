@@ -2,10 +2,16 @@ import React, { useContext, useEffect, useState } from "react";
 import { LeyendaNumeros } from "../component/LeyendaNumeros";
 import { Boleto } from "../component/Boleto";
 import { Context } from "../store/appContext";
+import { useNavigate } from "react-router-dom";
 
 export const Raffler = () => {
   const { store, actions } = useContext(Context);
   const [ticketSeleccionado, setTicketSeleccionado] = useState({});
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!store.tokenUserTalonario) navigate("/login");
+  }, []);
 
   useEffect(() => {
     if (
