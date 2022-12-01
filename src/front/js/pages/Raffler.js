@@ -50,39 +50,44 @@ export const Raffler = () => {
 
   return (
     <>
-      {store.talonarios.length > 0 && (
-        <Boleto talonario={store.talonarioSelect} />
-      )}
-      <div className="text-center mt-5 mb-5">
-        <h1>Tickets</h1>
-        <LeyendaNumeros />
-        <div className="talonario d-flex flex-wrap justify-content-center p-2 gap-2">
-          {store.tickets.map((numero, index) => (
-            <div
-              value={`${numero.status} ${numero.value}`}
-              key={index}
-              className={
-                numero.status == "reservado"
-                  ? "numero_reservado numero"
-                  : numero.status == "pagado"
-                  ? "numero_pagado numero"
-                  : "numero numero_disponible"
-              }
-              data-bs-toggle="modal"
-              data-bs-target="#exampleModal"
-              onClick={(e) =>
-                setTicketSeleccionado({
-                  value: numero.value,
-                  numero: numero.numero,
-                  status: numero.status,
-                })
-              }
-            >
-              {numero.value}
+      {store.talonarios.length > 0 ? (
+        <>
+          <Boleto talonario={store.talonarioSelect} />
+          <div className="text-center mt-5 mb-5">
+            <h1>Tickets</h1>
+            <LeyendaNumeros />
+            <div className="talonario d-flex flex-wrap justify-content-center p-2 gap-2">
+              {store.tickets.map((numero, index) => (
+                <div
+                  value={`${numero.status} ${numero.value}`}
+                  key={index}
+                  className={
+                    numero.status == "reservado"
+                      ? "numero_reservado numero"
+                      : numero.status == "pagado"
+                      ? "numero_pagado numero"
+                      : "numero numero_disponible"
+                  }
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                  onClick={(e) =>
+                    setTicketSeleccionado({
+                      value: numero.value,
+                      numero: numero.numero,
+                      status: numero.status,
+                    })
+                  }
+                >
+                  {numero.value}
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-      </div>
+          </div>
+        </>
+      ) : (
+        <div>No posees talonarios</div>
+      )}
+
       <div
         className="modal fade"
         id="exampleModal"
