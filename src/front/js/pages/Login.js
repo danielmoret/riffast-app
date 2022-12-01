@@ -1,4 +1,9 @@
-import React, { useContext, useState } from "react";
+import React, {
+  useContext,
+  useDeferredValue,
+  useEffect,
+  useState,
+} from "react";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
@@ -14,13 +19,15 @@ export const Login = () => {
     actions.login_talonario(email, password);
   };
 
-  if (
-    store.tokenUserTalonario &&
-    store.tokenUserTalonario !== "" &&
-    store.tokenUserTalonario !== undefined
-  ) {
-    navigate("/raffler");
-  }
+  useEffect(() => {
+    if (
+      store.tokenUserTalonario &&
+      store.tokenUserTalonario !== "" &&
+      store.tokenUserTalonario !== undefined
+    ) {
+      navigate("/raffler");
+    }
+  }, [store.tokenUserTalonario]);
 
   return (
     <div className="mt-5 signup min-vh-100">

@@ -339,7 +339,6 @@ const getState = ({ getStore, getActions, setStore }) => {
             alert("No se obtuvo info de ticket");
           }
           let data = await resp.json();
-          console.log(data);
           setStore({ infoTicket: data });
         } catch (error) {
           console.error(error);
