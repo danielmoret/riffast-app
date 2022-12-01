@@ -47,7 +47,7 @@ export const BtnCompartir = (props) => {
           target="_blank"
           href={`https://wa.me/?text=Te+invito+a+participar+en+mi+rifa+en+https%3a%2f%2f3000-4geeksacade-reactflaskh-oq5jaeh2ojf.ws-us77.gitpod.io%2fbuy%2f${props.talonarioID}`}
         >
-          <i class="fa-brands fa-whatsapp fa-lg"></i> Whatsapp
+          <i className="fa-brands fa-whatsapp fa-lg"></i> Whatsapp
         </a>
       </div>
     </>

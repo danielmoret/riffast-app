@@ -26,7 +26,7 @@ export const Navbar = () => {
         ) : (
           <div className="d-flex gap-2">
             {location.pathname == "/" ||
-            location.pathname == "/raffleregistration" ? (
+            location.pathname == "/raffleRegistration" ? (
               <Link to="/raffler" className="btn login">
                 Rifas
               </Link>
@@ -40,17 +40,22 @@ export const Navbar = () => {
                 >
                   Talonarios
                 </button>
-                <ul className="dropdown-menu">
+                <ul className="dropdown-menu dropdown-navbar px-4">
                   {store.talonarios.map((talonario) => (
                     <li
                       key={talonario.id}
                       onClick={(e) => actions.selectTalonario(talonario.id)}
                     >
-                      <span className="dropdown-item" href="#">
+                      <span className="dropdown-item dropdown-item-navbar">
                         {talonario.nombre}
                       </span>
                     </li>
                   ))}
+                  <li className="text-nowrap ">
+                    <Link to="/raffleRegistration" className="link-crear-rifa">
+                      Crear nuevo talonario <i className="fa-solid fa-plus"></i>
+                    </Link>
+                  </li>
                 </ul>
               </div>
             )}

@@ -7,6 +7,37 @@
   --color-lima: #6dd47e;
 }
 
+.link-crear-rifa:link,
+.link-crear-rifa:visited,
+.link-crear-rifa:active {
+  text-decoration: none;
+  color: #fed163;
+}
+
+.link-crear-rifa {
+  background-color: #293250;
+  padding: 5px;
+}
+
+.link-crear-rifa:hover {
+  color: var(--color-amarillo);
+  font-weight: bold;
+}
+
+.dropdown-navbar {
+  background-color: #293250;
+}
+
+.dropdown-item-navbar {
+  color: #fed163;
+}
+
+.dropdown-item-navbar:hover {
+  background-color: #293250;
+  color: #fed163;
+  font-weight: bold;
+}
+
 /* boleteo */
 .banda-l {
   background-color: #fed163;

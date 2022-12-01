@@ -4,6 +4,7 @@ import { Boleto } from "../component/Boleto";
 import { BtnCompartir } from "../component/BtnCompartir";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const Raffler = () => {
   const { store, actions } = useContext(Context);
@@ -87,7 +88,14 @@ export const Raffler = () => {
           </div>
         </>
       ) : (
-        <Link to="/raffleRegistration" className="btn boton btn-primary btn-signup">Crear nuevo talonario</Link>
+        <div className="text-center min-vh-100 d-flex justify-content-center align-items-center">
+          <Link
+            to="/raffleRegistration"
+            className="btn boton btn-primary btn-signup fs-5"
+          >
+            Crear nuevo talonario <i className="fa-solid fa-plus"></i>
+          </Link>
+        </div>
       )}
 
       <div
