@@ -3,7 +3,7 @@ import React from "react";
 export const Boleto = (props) => {
   return (
     <>
-      <div className="boleto mt-5">
+      <div className="boleto mt-5 mb-2">
         <div className="p-3 ms-5">
           <div className="banda-l"></div>
           <div className="logo-banda-r"></div>

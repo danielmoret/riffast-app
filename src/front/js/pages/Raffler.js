@@ -55,7 +55,7 @@ export const Raffler = () => {
       {store.talonarios.length > 0 ? (
         <>
           <Boleto talonario={store.talonarioSelect} />
-          <BtnCompartir talonarioID={store.talonarioSelect.id} />
+          <BtnCompartir talonario={store.talonarioSelect} />
           <div className="text-center mt-5 mb-5">
             <h1>Tickets</h1>
             <LeyendaNumeros />

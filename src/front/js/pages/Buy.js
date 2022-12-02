@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { Boleto } from "../component/Boleto.js";
 import { Buttons } from "../component/Buttons.js";
 import { VistaTickets } from "../component/VistaTickets.js";
+import { BtnCompartir } from "../component/BtnCompartir";
 import { Context } from "../store/appContext";
 
 export const Buy = () => {
@@ -91,7 +92,7 @@ export const Buy = () => {
   return (
     <div className="min-vh-100 mb-5">
       <Boleto talonario={store.talonarioSelect} />
-
+      <BtnCompartir talonario={store.talonarioSelect} />
       <Buttons setBuySelect={setBuySelect} />
 
       {buySelect === "newbuy" ? (
