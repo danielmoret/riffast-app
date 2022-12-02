@@ -27,7 +27,7 @@ export const Boleto = (props) => {
                 </div>
               </div>
               <div className="fs-5  d-flex">
-                <strong>Loteria:</strong>
+                <strong>Plataforma:</strong>
                 <div className="item-talonario ms-2">
                   {props.talonario.plataforma_sorteo}
                 </div>

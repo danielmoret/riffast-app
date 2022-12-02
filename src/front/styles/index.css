@@ -11,7 +11,7 @@
 .link-crear-rifa:visited,
 .link-crear-rifa:active {
   text-decoration: none;
-  color: #fed163;
+  color: #6dd47e;
 }
 
 .link-crear-rifa {
@@ -20,7 +20,7 @@
 }
 
 .link-crear-rifa:hover {
-  color: var(--color-amarillo);
+  color: var(--color-lima);
   font-weight: bold;
 }
 

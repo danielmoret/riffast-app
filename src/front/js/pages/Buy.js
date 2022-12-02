@@ -14,6 +14,7 @@ export const Buy = () => {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [correo, setCorreo] = useState("");
+  const [correoConsulta, setCorreoConsulta] = useState("");
   const [datosUser, setDatosUser] = useState([]);
 
   useEffect(() => {
@@ -59,13 +60,19 @@ export const Buy = () => {
         if (login != false) {
           console.log(params.talonario_id);
           actions.crearTicket(numeroTicket, params.talonario_id);
+          setBuySelect("revisar");
+          setFullName("");
+          setPhone("");
+          setEmail("");
         }
       }
     }
   };
 
   const consultar = () => {
-    actions.login_ticket(correo, correo);
+    actions.login_ticket(correoConsulta, correoConsulta);
+    actions.getTickets(params.talonario_id);
+    setCorreoConsulta("");
   };
 
   const reservarTicket = async () => {
@@ -74,6 +81,9 @@ export const Buy = () => {
       if (login != false) {
         console.log(params.talonario_id);
         actions.crearTicket(numeroTicket, params.talonario_id);
+        actions.getTickets(params.talonario_id);
+        setBuySelect("revisar");
+        setCorreo("");
       }
     }
   };
@@ -99,7 +109,9 @@ export const Buy = () => {
                 {store.tickets.map((ticket) => {
                   if (ticket.status == "disponible") {
                     return (
-                      <option value={ticket.numero}>{ticket.numero}</option>
+                      <option key={`${ticket.numero} no`} value={ticket.numero}>
+                        {ticket.numero}
+                      </option>
                     );
                   }
                 })}
@@ -167,25 +179,26 @@ export const Buy = () => {
               <input
                 className="form-control mb-3"
                 aria-label="Default"
-                value={correo}
-                onChange={(event) => setCorreo(event.target.value)}
+                value={correoConsulta}
+                onChange={(event) => setCorreoConsulta(event.target.value)}
               />
               <button type="submit" className="btn login" onClick={consultar}>
                 Consultar
               </button>
             </div>
           </div>
-          {store.tokenUserTicket &&
+          {((store.tokenUserTicket &&
             store.tokenUserTicket !== "" &&
             store.tokenUserTicket !== undefined &&
-            store.userTicketId !== null && (
-              <VistaTickets
-                key={store.talonarioSelect.id}
-                userData={datosUser}
-                userID={store.userTicketId}
-                tickets={store.ticketsReservados}
-              />
-            )}
+            store.userTicketId !== null) ||
+            store.userTicketId != null) && (
+            <VistaTickets
+              key={store.talonarioSelect.id}
+              userData={datosUser}
+              userID={store.userTicketId}
+              tickets={store.ticketsReservados}
+            />
+          )}
         </>
       ) : (
         buySelect === "previousbuy" && (
@@ -203,7 +216,9 @@ export const Buy = () => {
                 {store.tickets.map((ticket) => {
                   if (ticket.status == "disponible") {
                     return (
-                      <option value={ticket.numero}>{ticket.numero}</option>
+                      <option key={`${ticket.numero} si`} value={ticket.numero}>
+                        {ticket.numero}
+                      </option>
                     );
                   }
                 })}

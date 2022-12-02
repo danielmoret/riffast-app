@@ -24,7 +24,7 @@ export const BtnCompartir = (props) => {
       <div className="text-center mt-3 d-flex justify-content-center gap-2">
         <div className="text-center fs-4 fw-bold d-flex">Compartir</div>
         <button className="btn login" onClick={handleClick}>
-          <i class="fa-solid fa-link"></i> Link
+          <i className="fa-solid fa-link"></i> Link
         </button>
 
         <a
