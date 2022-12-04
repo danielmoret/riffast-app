@@ -22,6 +22,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           initial: "white",
         },
       ],
+      imageUrl: "",
     },
     actions: {
       // Use getActions to call a function within a fuction
@@ -171,6 +172,11 @@ const getState = ({ getStore, getActions, setStore }) => {
         } catch (error) {
           console.log(error);
         }
+      },
+
+      addUrl: (url) => {
+        const store = getStore();
+        setStore({ imageUrl: url });
       },
 
       obtenerTalonario: async () => {

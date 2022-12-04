@@ -1,6 +1,12 @@
+import { useContext, useState } from "react";
 import React from "react";
+import { Context } from "../store/appContext";
+import CloudinaryUploadWidget from "./UploadPhoto";
 
 export const Boleto = (props) => {
+  const [imageUrl, setImageUrl] = useState("");
+  const {store, actions} = useContext(Context);
+  
   return (
     <>
       <div className="boleto mt-5 mb-2">
@@ -40,8 +46,7 @@ export const Boleto = (props) => {
               </div>
             </div>
             <img
-              src="https://beravirtual.com/wp-content/uploads/2021/09/DSC_589-1.png"
-              style={{ width: "150px", height: "150px", overflow: "hidden" }}
+              style={{ imageUrl: store.imageUrl, width: "150px", height: "150px", overflow: "hidden" }}
             ></img>
           </div>
         </div>
