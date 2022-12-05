@@ -5,15 +5,28 @@ import { BtnCompartir } from "../component/BtnCompartir";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { TalonarioFinalizado } from "../component/TalonarioFinalizado";
 
 export const Raffler = () => {
   const { store, actions } = useContext(Context);
   const [ticketSeleccionado, setTicketSeleccionado] = useState({});
   const navigate = useNavigate();
+  const tiempoTranscurrido = Date.now();
+  const hoy = new Date(tiempoTranscurrido);
 
   useEffect(() => {
     if (!store.tokenUserTalonario) navigate("/login");
   }, []);
+
+  useEffect(() => {
+    if (
+      hoy.getTime() > new Date(store.talonarioSelect.fecha_sorteo).getTime()
+    ) {
+      console.log("Ya se cumplio el tiempo de la rifa");
+    } else {
+      console.log("todavia falta");
+    }
+  }, [store.tokenUserTalonario]);
 
   useEffect(() => {
     if (
@@ -54,6 +67,10 @@ export const Raffler = () => {
     <>
       {store.talonarios.length > 0 ? (
         <>
+          {hoy.getTime() >
+            new Date(store.talonarioSelect.fecha_sorteo).getTime() && (
+            <TalonarioFinalizado />
+          )}
           <Boleto talonario={store.talonarioSelect} />
           <BtnCompartir talonario={store.talonarioSelect} />
           <div className="text-center mt-5 mb-5">

@@ -5,6 +5,7 @@ import { Buttons } from "../component/Buttons.js";
 import { VistaTickets } from "../component/VistaTickets.js";
 import { BtnCompartir } from "../component/BtnCompartir";
 import { Context } from "../store/appContext";
+import { TalonarioFinalizado } from "../component/TalonarioFinalizado";
 
 export const Buy = () => {
   const params = useParams();
@@ -17,6 +18,8 @@ export const Buy = () => {
   const [correo, setCorreo] = useState("");
   const [correoConsulta, setCorreoConsulta] = useState("");
   const [datosUser, setDatosUser] = useState([]);
+  const tiempoTranscurrido = Date.now();
+  const hoy = new Date(tiempoTranscurrido);
 
   useEffect(() => {
     actions.selectTalonario(params.talonario_id);
@@ -91,6 +94,10 @@ export const Buy = () => {
 
   return (
     <div className="min-vh-100 mb-5">
+      {hoy.getTime() >
+        new Date(store.talonarioSelect.fecha_sorteo).getTime() && (
+        <TalonarioFinalizado />
+      )}
       <Boleto talonario={store.talonarioSelect} />
       <BtnCompartir talonario={store.talonarioSelect} />
       <Buttons setBuySelect={setBuySelect} />

@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
+import CloudinaryUploadWidget from "../component/UploadImage";
 import "../../styles/home.css";
 
 export const RaffleRegistration = () => {
@@ -8,36 +9,42 @@ export const RaffleRegistration = () => {
   const [nombre, setNombre] = useState("");
   const [premio, setPremio] = useState("");
   const [precio, setPrecio] = useState("");
-  const [img, setImg] = useState("");
+  const [img, setImg] = useState({});
   const [descripcion, setDescripcion] = useState("");
   const [fecha, setFecha] = useState("");
   const [plataforma, setPlataforma] = useState("");
   const [metodoPago, setMetodoPago] = useState("");
   const navigate = useNavigate();
 
+  useEffect(() => {
+    setImg(store.imageUrls);
+  }, [store.imageUrls]);
+
   const sendData = (event) => {
     event.preventDefault();
-    actions.crear_talonario(
-      nombre,
-      premio,
-      precio,
-      img,
-      descripcion,
-      fecha,
-      plataforma,
-      metodoPago
-    );
     if (
       nombre != "" &&
       premio != "" &&
       precio != "" &&
-      img != "" &&
+      img.url != undefined &&
       descripcion != "" &&
       fecha != "" &&
       plataforma != "" &&
       metodoPago != ""
-    )
+    ) {
+      actions.crear_talonario(
+        nombre,
+        premio,
+        precio,
+        img.url,
+        descripcion,
+        fecha,
+        plataforma,
+        metodoPago
+      );
       navigate("/raffler");
+      store.imageUrls = {};
+    }
   };
 
   return (
@@ -100,14 +107,14 @@ export const RaffleRegistration = () => {
             <label htmlFor="formFileMultiple" className="form-label">
               <strong>Imagen del premio:</strong>
             </label>
-            <input
-              className="form-control"
-              type="file"
-              id="formFileMultiple"
-              multiple
-              value={img}
-              onChange={(event) => setImg(event.target.value)}
-            ></input>
+            <div className="text-center mt-5 ">
+              {Object.entries(store.imageUrls).length > 0 && (
+                <div>
+                  <img src={store.imageUrls.thumbnail}></img>
+                </div>
+              )}
+              <CloudinaryUploadWidget />
+            </div>
           </div>
 
           <div className="descripcion mb-3">
@@ -149,7 +156,7 @@ export const RaffleRegistration = () => {
               value={plataforma}
               onChange={(event) => setPlataforma(event.target.value)}
             >
-              <option selected>Seleccione una plataforma/medio</option>
+              <option>Seleccione una plataforma/medio</option>
               <option value="instagram">Instagram</option>
               <option value="twitter">Twitter</option>
               <option value="facebook">Facebook</option>
@@ -169,7 +176,7 @@ export const RaffleRegistration = () => {
               value={metodoPago}
               onChange={(event) => setMetodoPago(event.target.value)}
             >
-              <option selected>Seleccione un método de pago</option>
+              <option>Seleccione un método de pago</option>
               <option value="$">Dolares en efectivo</option>
               <option value="binance">Binance</option>
               <option value="pago movil">Pago movil</option>

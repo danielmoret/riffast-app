@@ -1,7 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 
 export const Buttons = (props) => {
+  const { store, actions } = useContext(Context);
+  const tiempoTranscurrido = Date.now();
+  const hoy = new Date(tiempoTranscurrido);
+
   return (
     <div className="container text-center d-flex justify-content-evenly mt-3 ps-2">
       {/* <!-- Button trigger modal --> */}
@@ -10,6 +15,10 @@ export const Buttons = (props) => {
         className="buyer btn btn-lg"
         data-bs-toggle="modal"
         data-bs-target="#exampleModal"
+        disabled={
+          hoy.getTime() >
+            new Date(store.talonarioSelect.fecha_sorteo).getTime() && "true"
+        }
       >
         Comprar ticket <i className="fa-solid fa-sack-dollar fa-lg"></i>
       </button>

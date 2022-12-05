@@ -40,8 +40,8 @@ export const Boleto = (props) => {
               </div>
             </div>
             <img
-              src="https://beravirtual.com/wp-content/uploads/2021/09/DSC_589-1.png"
-              style={{ width: "150px", height: "150px", overflow: "hidden" }}
+              src={props.talonario.imagen_premio}
+              style={{ width: "140px", height: "140px", overflow: "hidden" }}
             ></img>
           </div>
         </div>

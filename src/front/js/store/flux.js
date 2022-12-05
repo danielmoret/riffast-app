@@ -1,6 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
+      imageUrls: {},
       tokenUserTalonario: null,
       tokenUserTicket: null,
       message: null,
@@ -25,6 +26,11 @@ const getState = ({ getStore, getActions, setStore }) => {
     },
     actions: {
       // Use getActions to call a function within a fuction
+
+      addImageUrl: (url, thumbnail) => {
+        const store = getStore();
+        setStore({ imageUrls: { url: url, thumbnail: thumbnail } });
+      },
 
       syncToken: () => {
         const tokenUserTalonario = sessionStorage.getItem("tokenUserTalonario");
