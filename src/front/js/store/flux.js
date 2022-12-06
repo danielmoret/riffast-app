@@ -33,6 +33,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       syncToken: () => {
+        const actions = getActions();
         const tokenUserTalonario = sessionStorage.getItem("tokenUserTalonario");
         const tokenUserTicket = sessionStorage.getItem("tokenUserTicket");
         console.log(
@@ -44,6 +45,8 @@ const getState = ({ getStore, getActions, setStore }) => {
           tokenUserTalonario != undefined
         ) {
           setStore({ tokenUserTalonario: tokenUserTalonario });
+        } else {
+          actions.logout_talonario();
         }
 
         if (
