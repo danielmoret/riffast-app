@@ -115,6 +115,8 @@ export const Raffler = () => {
         </div>
       )}
 
+      {/*Primer modal */}
+
       <div
         className="modal fade"
         id="exampleModal"

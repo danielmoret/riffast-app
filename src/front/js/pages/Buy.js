@@ -57,7 +57,7 @@ export const Buy = () => {
 
   const sendData = async (e) => {
     e.preventDefault();
-    if (fullName != "" && phone != "" && numeroTicket != "") {
+    if (fullName != "" && phone != "" && numeroTicket != "" && email != "") {
       let buy = await actions.buyTickets(fullName, phone, email);
       if (buy != false) {
         let login = await actions.login_ticket(email, phone);
@@ -65,9 +65,11 @@ export const Buy = () => {
           console.log(params.talonario_id);
           actions.crearTicket(numeroTicket, params.talonario_id);
           setBuySelect("revisar");
+          actions.getTickets(params.talonario_id);
           setFullName("");
           setPhone("");
           setEmail("");
+          setNumeroTicket("");
         }
       }
     }
@@ -88,6 +90,7 @@ export const Buy = () => {
         actions.getTickets(params.talonario_id);
         setBuySelect("revisar");
         setCorreo("");
+        setNumeroTicket("");
       }
     }
   };
@@ -113,7 +116,7 @@ export const Buy = () => {
                 value={numeroTicket}
                 onChange={(event) => setNumeroTicket(event.target.value)}
               >
-                <option>Selecciona tu número</option>
+                <option value="">Selecciona tu número</option>
                 {store.tickets.map((ticket) => {
                   if (ticket.status == "disponible") {
                     return (
@@ -150,7 +153,7 @@ export const Buy = () => {
               </div>
 
               <div className="form-group mb-3 fw-bold">
-                <label className="form-label">Email (opcional)</label>
+                <label className="form-label">Email</label>
                 <input
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
