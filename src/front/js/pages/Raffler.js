@@ -20,16 +20,6 @@ export const Raffler = () => {
 
   useEffect(() => {
     if (
-      hoy.getTime() > new Date(store.talonarioSelect.fecha_sorteo).getTime()
-    ) {
-      console.log("Ya se cumplio el tiempo de la rifa");
-    } else {
-      console.log("todavia falta");
-    }
-  }, [store.tokenUserTalonario]);
-
-  useEffect(() => {
-    if (
       store.tokenUserTalonario &&
       store.tokenUserTalonario !== "" &&
       store.tokenUserTalonario !== undefined
@@ -56,7 +46,6 @@ export const Raffler = () => {
 
   const deleteTicket = (numeroTicket, talonarioId) => {
     actions.deleteTicket(numeroTicket, talonarioId);
-    console.log(numeroTicket, talonarioId);
   };
 
   const updateStatusToPaid = (numeroTicket, talonarioId) => {

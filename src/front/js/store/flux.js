@@ -86,7 +86,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           }
 
           const data = await resp.json();
-          console.log("This came from the backend", data);
+
           return true;
         } catch (error) {
           console.error("There has been an error signup");
@@ -118,7 +118,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           }
 
           const data = await resp.json();
-          console.log("this came from the backen", data);
+
           sessionStorage.setItem("tokenUserTalonario", data.access_token);
           setStore({ tokenUserTalonario: data.access_token });
           return true;
@@ -176,7 +176,6 @@ const getState = ({ getStore, getActions, setStore }) => {
             alert("no se pudo realizar esta accion");
           }
           const data = await resp.json();
-          console.log(data);
         } catch (error) {
           console.log(error);
         }
@@ -201,7 +200,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           let data = await resp.json();
           setStore({ talonarios: data });
         } catch (error) {
-          console.log();
+          console.log(error);
         }
       },
 
@@ -248,7 +247,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           }
 
           const data = await resp.json();
-          console.log("this came from the backen", data);
+
           sessionStorage.setItem("tokenUserTicket", data.access_token);
           setStore({ tokenUserTicket: data.access_token });
           setStore({ userTicketId: data.user_ticket_id });

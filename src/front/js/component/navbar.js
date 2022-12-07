@@ -64,7 +64,7 @@ export const Navbar = () => {
                 className="btn  register"
                 onClick={() => actions.logout_talonario()}
               >
-                Logout
+                Cerrar Sesión
               </button>
             </Link>
           </div>

@@ -6,7 +6,6 @@ export const VistaTickets = (props) => {
 
   const deleteTicket = (numeroTicket, talonarioId) => {
     actions.deleteTicket(numeroTicket, talonarioId);
-    console.log(numeroTicket, talonarioId);
   };
   return (
     <>
