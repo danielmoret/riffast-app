@@ -17,7 +17,7 @@ export const Navbar = () => {
         ) : !store.tokenUserTalonario ? (
           <div className="ml-auto d-flex gap-2">
             <Link to="/login" className="btn login">
-              Login
+              Ingresar
             </Link>
             <Link to="/signup" className="btn  register">
               Registro

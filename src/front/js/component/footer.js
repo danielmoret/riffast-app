@@ -3,7 +3,7 @@ import React, { Component } from "react";
 export const Footer = () => (
   <footer className="footer text-center mt-auto">
     <div>
-      <h5>TECHNOLOGIES</h5>
+      <h5>TECNOLOGÍAS</h5>
       <p className="iconos">
         <i className="fa-brands fa-html5 i-footer"></i>
         <i className="fa-brands fa-css3-alt i-footer"></i>
@@ -20,12 +20,12 @@ export const Footer = () => (
     </div>
 
     <div>
-      <h5>LOCATION</h5>
+      <h5>UBICACIÓN</h5>
       <p className="locationf">©4Geeks Academy | Caracas - Venezuela</p>
     </div>
 
     <div>
-      <h5>AROUND THE WEB</h5>
+      <h5>ENCUÉNTRANOS EN:</h5>
       <p className="iconos">
         <i className="fa-brands fa-instagram i-footer"></i>
         <i className="fa-brands fa-twitter i-footer"></i>
