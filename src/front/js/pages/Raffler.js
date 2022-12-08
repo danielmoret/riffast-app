@@ -16,9 +16,13 @@ export const Raffler = () => {
 
   useEffect(() => {
     if (!store.tokenUserTalonario) navigate("/login");
-    console.log("Nueva rifa");
-    actions.obtenerTalonario();
   }, []);
+
+  useEffect(() => {
+    if (store.talonarios.length > 0) {
+      actions.obtenerTalonario();
+    }
+  }, [store.talonario]);
 
   useEffect(() => {
     if (
