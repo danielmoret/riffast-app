@@ -53,7 +53,7 @@ export const BtnCompartir = (props) => {
 
           <a
             className="btn login"
-            href={`https://twitter.com/intent/tweet?text=Te%20invito%20a%20participar%20en%20mi%20rifa%20en%20https://3000-4geeksacade-reactflaskh-oq5jaeh2ojf.ws-us77.gitpod.io/buy/${props.talonario.id}%20via%20@Riffast`}
+            href={`https://twitter.com/intent/tweet?text=Te%20invito%20a%20participar%20en%20mi%20rifa%20en%20https://riffast.onrender.com/buy/${props.talonario.id}%20via%20@Riffast`}
             target="_blank"
           >
             <i className="fa-brands fa-twitter"></i> Twitter
@@ -62,14 +62,14 @@ export const BtnCompartir = (props) => {
           <a
             className="btn login"
             target="_blank"
-            href={`https://www.facebook.com/sharer/sharer.php?u=https%3A//3000-4geeksacade-reactflaskh-oq5jaeh2ojf.ws-us77.gitpod.io/buy/${props.talonario.id}`}
+            href={`https://www.facebook.com/sharer/sharer.php?u=https://riffast.onrender.com/buy/${props.talonario.id}`}
           >
             <i className="fa-brands fa-facebook"></i> Facebook
           </a>
           <a
             className="btn login"
             target="_blank"
-            href={`https://wa.me/?text=Te+invito+a+participar+en+mi+rifa+en+https%3a%2f%2f3000-4geeksacade-reactflaskh-oq5jaeh2ojf.ws-us77.gitpod.io%2fbuy%2f${props.talonario.id}`}
+            href={`https://api.whatsapp.com/send/?text=Te+invito+a+participar+en+mi+rifa+en+https://riffast.onrender.com/buy/${props.talonario.id}+en+@riffast`}
           >
             <i className="fa-brands fa-whatsapp fa-lg"></i> Whatsapp
           </a>
