@@ -18,11 +18,11 @@ export const Raffler = () => {
     if (!store.tokenUserTalonario) navigate("/login");
   }, []);
 
-  useEffect(() => {
+  /* useEffect(() => {
     if (store.talonarios.length > 0) {
       actions.obtenerTalonario();
     }
-  }, [store.talonario]);
+  }, [store.talonario]); */
 
   useEffect(() => {
     if (

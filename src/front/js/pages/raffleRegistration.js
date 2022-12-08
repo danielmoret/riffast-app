@@ -42,8 +42,9 @@ export const RaffleRegistration = () => {
         plataforma,
         metodoPago
       );
-      navigate("/raffler");
+      actions.obtenerTalonario();
       store.imageUrls = {};
+      navigate("/raffler");
     }
   };
 
