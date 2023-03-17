@@ -75,7 +75,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         try {
           const resp = await fetch(
-            `${process.env.BACKEND_URL}/api/user-talonario`,
+            `${process.env.BACKEND_URL}/user-talonario`,
             opts
           );
 
@@ -108,7 +108,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         try {
           const resp = await fetch(
-            `${process.env.BACKEND_URL}/api/login-talonario`,
+            `${process.env.BACKEND_URL}/login-talonario`,
             opts
           );
 
@@ -169,7 +169,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         };
         try {
           const resp = await fetch(
-            `${process.env.BACKEND_URL}/api/talonario`,
+            `${process.env.BACKEND_URL}/talonario`,
             opts
           );
           if (!resp.ok) {
@@ -190,7 +190,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         };
         try {
           const resp = await fetch(
-            `${process.env.BACKEND_URL}/api/talonario`,
+            `${process.env.BACKEND_URL}/talonario`,
             opts
           );
           if (!resp.ok) {
@@ -207,7 +207,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       selectTalonario: async (talonarioId) => {
         const store = getStore();
         const resp = await fetch(
-          `${process.env.BACKEND_URL}/api/talonario/${talonarioId}`
+          `${process.env.BACKEND_URL}/talonario/${talonarioId}`
         );
         try {
           if (!resp.ok) {
@@ -237,7 +237,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         try {
           const resp = await fetch(
-            `${process.env.BACKEND_URL}/api/login-ticket`,
+            `${process.env.BACKEND_URL}/login-ticket`,
             opts
           );
 
@@ -272,7 +272,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         try {
           const response = await fetch(
-            `${process.env.BACKEND_URL}/api/user-ticket`,
+            `${process.env.BACKEND_URL}/user-ticket`,
             opts
           );
           if (!response.ok) {
@@ -302,10 +302,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           }),
         };
         try {
-          const resp = await fetch(
-            `${process.env.BACKEND_URL}/api/ticket`,
-            opts
-          );
+          const resp = await fetch(`${process.env.BACKEND_URL}/ticket`, opts);
           if (!resp.ok) {
             alert("no se pudo crear ticket");
           }
@@ -324,7 +321,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           },
         };
         const resp = await fetch(
-          `${process.env.BACKEND_URL}/api/tickets/${talonarioID}`,
+          `${process.env.BACKEND_URL}/tickets/${talonarioID}`,
           opts
         );
         try {
@@ -340,7 +337,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       infoTicket: async (numero, talonarioID) => {
         const resp = await fetch(
-          `${process.env.BACKEND_URL}/api/info-ticket/${numero}/${talonarioID}`
+          `${process.env.BACKEND_URL}/info-ticket/${numero}/${talonarioID}`
         );
         try {
           if (!resp.ok) {
@@ -363,7 +360,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           },
         };
         const resp = await fetch(
-          `${process.env.BACKEND_URL}/api/delete-ticket/${numeroTicket}/${talonarioId}`,
+          `${process.env.BACKEND_URL}/delete-ticket/${numeroTicket}/${talonarioId}`,
           opts
         );
         try {
@@ -382,7 +379,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         const store = getStore();
         const actions = getActions();
         const resp = await fetch(
-          `${process.env.BACKEND_URL}/api/paid-ticket/${numeroTicket}/${talonarioId}`
+          `${process.env.BACKEND_URL}/paid-ticket/${numeroTicket}/${talonarioId}`
         );
         try {
           if (!resp.ok) {
@@ -436,18 +433,6 @@ const getState = ({ getStore, getActions, setStore }) => {
         setStore({ tickets: num });
       },
 
-      getMessage: async () => {
-        try {
-          // fetching data from the backend
-          const resp = await fetch(process.env.BACKEND_URL + "/api/hello");
-          const data = await resp.json();
-          setStore({ message: data.message });
-          // don't forget to return something, that is how the async resolves
-          return data;
-        } catch (error) {
-          console.log("Error loading message from backend", error);
-        }
-      },
       changeColor: (index, color) => {
         //get the store
         const store = getStore();
